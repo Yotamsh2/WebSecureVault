@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Jan 28 14:37:14 IST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016f-ec27-e203-00000f782118 
+on database directory C:\Users\yotam\IdeaProjects\WebSecureVault\secureVaultDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
+Loaded from file:/C:/Apache/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=13.0.1+9
+user.dir=C:\Users\yotam\IdeaProjects\WebSecureVault
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
