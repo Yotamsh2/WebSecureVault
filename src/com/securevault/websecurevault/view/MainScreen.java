@@ -190,8 +190,4 @@ public class MainScreen extends JFrame{
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        mainScreen.go();
-    }
 }

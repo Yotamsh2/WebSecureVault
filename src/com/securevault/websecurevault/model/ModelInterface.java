@@ -1,4 +1,4 @@
-package com.securevault.websecurevault;
+package com.securevault.websecurevault.model;
 
 import java.sql.ResultSet;
 

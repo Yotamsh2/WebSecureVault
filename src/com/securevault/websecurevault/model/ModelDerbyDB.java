@@ -1,13 +1,6 @@
-package com.securevault.websecurevault;
+package com.securevault.websecurevault.model;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static com.securevault.websecurevault.DBConnection.*;
 
 /**Model class is used to implement the ModelInterface methods.
  * It implements three methods that responsible for the connection with the Derby Database.*/

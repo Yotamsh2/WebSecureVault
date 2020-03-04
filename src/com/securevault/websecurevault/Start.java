@@ -1,17 +1,19 @@
 package com.securevault.websecurevault;
 
+import com.securevault.websecurevault.model.ModelDerbyDB;
+import com.securevault.websecurevault.view.MainScreen;
+
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+
 
 /**Start class runs the main method of the app.
  * It is connecting to the DB and run the main screen of the app.*/
 public class Start {
 
     public static void main(String[] args) {
+        MainScreen mainScreen = new MainScreen();
+        mainScreen.go(); //Create And Show New Main Screen
+
         ModelDerbyDB mdDB = new ModelDerbyDB();
         ResultSet rs = mdDB.getRecords("Website");
         //System.out.println("rs: "+ rs.toString());
