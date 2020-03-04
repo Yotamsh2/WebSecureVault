@@ -1,32 +1,43 @@
 package com.securevault.websecurevault.view;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.BorderUIResource;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//TODO: make variables camelCase and not snake_case
+//TODO: meaningful variable names
+//TODO: make panels final with initalization
 public class MainScreen extends JFrame{
-    private JLabel username_label;
-    private JLabel logo_label;
-    private JTable formView_table;
-    private JPanel main_panel,p1,p2,p3,p4,p5;
-    private JButton profile_button;
-    private JButton add_button;
-    private JButton category_button1, category_button2, category_button3;
-    private JButton category_button4, category_button5, category_button6;
-
-    private JFrame f = new JFrame();
+    private final JPanel flowLeftPanel = new JPanel();
+    private  JLabel usernameLabel = new JLabel();
+    private JLabel logoLabel;
+    private JTable formViewTable;
+    private JPanel mainPanel;
+    private final JPanel flowRightPanel = new JPanel();
+    private JPanel categoryButtonPanel;
+    private JPanel tablePanel;
+    private JPanel topBarPanel;
+    private JButton profileButton;
+    private JButton addButton;
+    private JButton categoryButton1 = new JButton("Credit Card");
+    private JButton categoryButton2 = new JButton("Bank Account");
+    private JButton categoryButton3 = new JButton("Social Media");
+    private JButton categoryButton4 = new JButton("Website and Email");
+    private JButton categoryButton5 = new JButton("Online Shopping");
+    private JButton categoryButton6 = new JButton("Note");
+    private JFrame mainFrame = new JFrame();
     static MainScreen mainScreen = new MainScreen();
 
     public MainScreen() {
         // Initializing components
-        main_panel = new JPanel();
-        p1 = new JPanel();
-        p2 = new JPanel();
-        p3 = new JPanel();
-        p4 = new JPanel();
-        p5 = new JPanel();
+        mainPanel = new JPanel();
+        categoryButtonPanel = new JPanel();
+        tablePanel = new JPanel();
+        topBarPanel = new JPanel();
 
         //data test
         String[][] data = {
@@ -55,64 +66,129 @@ public class MainScreen extends JFrame{
                 { "Credit Card Laumi", "1234-5678", "123" },
                 { "Credit Card Hapoalim", "1234-5678", "123" }
         };
-        String[] columnNames = { "Title", "Card Number", "CVV" };
+        String[] columnNames = { "Title", "Card Number", "CVV", "Note" };
 
         //setting the layout and models of the components
-        main_panel.setLayout(new BorderLayout());
-        p1.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-        p2.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
-        p3.setLayout(new GridLayout(3,2));
-        p4.setLayout(new BorderLayout());
-        p5.setLayout(new GridLayout(1,2));
-        formView_table = new JTable(data, columnNames);
+        mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+        mainPanel.setLayout(new BorderLayout());
+        flowLeftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
+        flowRightPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
+        categoryButtonPanel.setLayout(new GridLayout(3,2));
+        tablePanel.setLayout(new BorderLayout());
+        topBarPanel.setLayout(new GridLayout(1,2));
+        formViewTable = new JTable(data, columnNames);
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-        formView_table.setModel(tableModel);
+        formViewTable.setModel(tableModel);
 
         //adding components to panels
-        p1.add(logo_label);
-        p1.add(username_label);
-        p2.add(profile_button);
-        p2.add(add_button);
-        p3.add(category_button1);
-        p3.add(category_button2);
-        p3.add(category_button3);
-        p3.add(category_button4);
-        p3.add(category_button5);
-        p3.add(category_button6);
-        p4.add(new JScrollPane(formView_table),BorderLayout.CENTER);
-        p5.add(p1);
-        p5.add(p2);
-        main_panel.add(p3,BorderLayout.EAST);
-        main_panel.add(p4,BorderLayout.CENTER);
-        main_panel.add(p5,BorderLayout.NORTH);
+        flowLeftPanel.add(logoLabel);
+        flowLeftPanel.add(usernameLabel);
+        flowRightPanel.add(profileButton);
+        flowRightPanel.add(addButton);
+        categoryButtonPanel.add(categoryButton1);
+        categoryButtonPanel.add(categoryButton2);
+        categoryButtonPanel.add(categoryButton3);
+        categoryButtonPanel.add(categoryButton4);
+        categoryButtonPanel.add(categoryButton5);
+        categoryButtonPanel.add(categoryButton6);
+        tablePanel.add(new JScrollPane(formViewTable),BorderLayout.CENTER);
+        topBarPanel.add(flowLeftPanel);
+        topBarPanel.add(flowRightPanel);
+        mainPanel.add(categoryButtonPanel,BorderLayout.EAST);
+        mainPanel.add(tablePanel,BorderLayout.CENTER);
+        mainPanel.add(topBarPanel,BorderLayout.NORTH);
 
 
-        profile_button.addActionListener(new ActionListener() {
+        profileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Here You Will View Your Profile");
+                Profile profile = new Profile();
+                mainFrame.setEnabled(false);
+                profile.go(mainScreen);
             }
         });
-        add_button.addActionListener(new ActionListener() {
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Add add = new Add();
-                f.setEnabled(false);
+                mainFrame.setEnabled(false);
                 add.go(mainScreen);
+            }
+        });
+        categoryButton1.addActionListener(new ActionListener() {//Credit Card
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] columnNames = { "Title", "Card Number", "CVV", "Note" };
+                // TODO: 03/03/2020 function that gathers data from db
+                String[][] data = null;
+                tableModel.setDataVector(null, columnNames);
+                formViewTable.setModel(tableModel);
+            }
+        });
+        categoryButton2.addActionListener(new ActionListener() {//Bank Account
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] columnNames = { "Title", "User Name", "Password", "Account Number", "Bank Number", "Bank Address", "Note" };
+                // TODO: 03/03/2020 function that gathers data from db
+                String[][] data = null;
+                tableModel.setDataVector(null, columnNames);
+                formViewTable.setModel(tableModel);
+            }
+        });
+        categoryButton3.addActionListener(new ActionListener() {//Social Media
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] columnNames = { "Title", "User Name", "Password", "Website", "Email", "Note" };
+                // TODO: 03/03/2020 function that gathers data from db
+                String[][] data = null;
+                tableModel.setDataVector(null, columnNames);
+                formViewTable.setModel(tableModel);
+            }
+        });
+        categoryButton4.addActionListener(new ActionListener() {//Website and Email
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] columnNames = { "Title", "User Name", "Password", "Website", "Email", "Note" };
+                // TODO: 03/03/2020 function that gathers data from db
+                String[][] data = null;
+                tableModel.setDataVector(null, columnNames);
+                formViewTable.setModel(tableModel);
+            }
+        });
+        categoryButton5.addActionListener(new ActionListener() {//Online Shopping
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] columnNames = { "Title", "User Name", "Password", "Website", "Email", "Note" };
+                // TODO: 03/03/2020 function that gathers data from db
+                String[][] data = null;
+                tableModel.setDataVector(null, columnNames);
+                formViewTable.setModel(tableModel);
+            }
+        });
+        categoryButton6.addActionListener(new ActionListener() {//Note
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] columnNames = { "Title", "Note" };
+                // TODO: 03/03/2020 function that gathers data from db
+                String[][] data = null;
+                tableModel.setDataVector(null, columnNames);
+                formViewTable.setModel(tableModel);
             }
         });
     }
 
+    /**making mainPanel enabled again after being disabled.*/
     public void setFrameEnabled() {
-        f.setEnabled(true);
+        mainFrame.setEnabled(true);
     }
 
+    /**go function is the function that's running the main screen and making it visible.*/
     public void go()
     {
-        f.setSize(600,400);
-        f.setContentPane(main_panel);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
+        mainFrame.setSize(1000,500);
+        mainFrame.setContentPane(mainPanel);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
     }
 
     public static void main(String[] args) {

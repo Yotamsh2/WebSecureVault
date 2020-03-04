@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.securevault.websecurevault.view.MainScreen">
-  <grid id="27dc6" binding="main_panel" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="508" height="400"/>
@@ -8,9 +8,11 @@
     <properties>
       <enabled value="true"/>
     </properties>
-    <border type="none"/>
+    <border type="empty">
+      <size top="10" left="10" bottom="10" right="10"/>
+    </border>
     <children>
-      <component id="86b21" class="javax.swing.JButton" binding="profile_button">
+      <component id="86b21" class="javax.swing.JButton" binding="profileButton">
         <constraints>
           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -18,7 +20,7 @@
           <text value="Profile"/>
         </properties>
       </component>
-      <component id="8e39e" class="javax.swing.JLabel" binding="username_label">
+      <component id="8e39e" class="javax.swing.JLabel" binding="usernameLabel">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -26,7 +28,7 @@
           <text value="User Name"/>
         </properties>
       </component>
-      <component id="df631" class="javax.swing.JLabel" binding="logo_label">
+      <component id="df631" class="javax.swing.JLabel" binding="logoLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -41,13 +43,13 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="fce11" class="javax.swing.JTable" binding="formView_table">
+          <component id="fce11" class="javax.swing.JTable" binding="formViewTable">
             <constraints/>
             <properties/>
           </component>
         </children>
       </scrollpane>
-      <component id="7ea76" class="javax.swing.JButton" binding="category_button1">
+      <component id="7ea76" class="javax.swing.JButton" binding="categoryButton1">
         <constraints>
           <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -55,7 +57,7 @@
           <text value="Catgory1"/>
         </properties>
       </component>
-      <component id="e56ff" class="javax.swing.JButton" binding="category_button3">
+      <component id="e56ff" class="javax.swing.JButton" binding="categoryButton3">
         <constraints>
           <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -63,7 +65,7 @@
           <text value="Catgory3"/>
         </properties>
       </component>
-      <component id="840bc" class="javax.swing.JButton" binding="category_button2">
+      <component id="840bc" class="javax.swing.JButton" binding="categoryButton2">
         <constraints>
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -71,15 +73,15 @@
           <text value="Catgory2"/>
         </properties>
       </component>
-      <component id="4c3e4" class="javax.swing.JButton" binding="category_button4">
+      <component id="4c3e4" class="javax.swing.JButton" binding="categoryButton4">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Catgory4"/>
+          <text value="Credit Card"/>
         </properties>
       </component>
-      <component id="4803d" class="javax.swing.JButton" binding="category_button5">
+      <component id="4803d" class="javax.swing.JButton" binding="categoryButton5">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -87,7 +89,7 @@
           <text value="Catgory5"/>
         </properties>
       </component>
-      <component id="839b1" class="javax.swing.JButton" binding="category_button6">
+      <component id="839b1" class="javax.swing.JButton" binding="categoryButton6">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -95,7 +97,7 @@
           <text value="Catgory6"/>
         </properties>
       </component>
-      <component id="bbdd3" class="javax.swing.JButton" binding="add_button">
+      <component id="bbdd3" class="javax.swing.JButton" binding="addButton">
         <constraints>
           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

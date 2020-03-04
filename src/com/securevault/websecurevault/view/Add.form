@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.securevault.websecurevault.view.Add">
-  <grid id="27dc6" binding="addpage_panel" layout-manager="GridLayoutManager" row-count="14" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="addpagePanel" layout-manager="GridLayoutManager" row-count="14" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="613" height="513"/>
+      <xy x="20" y="20" width="613" height="529"/>
     </constraints>
     <properties/>
-    <border type="none"/>
+    <border type="empty">
+      <size top="5" left="5" bottom="5" right="5"/>
+    </border>
     <children>
-      <component id="5ec98" class="javax.swing.JTextField" binding="username_textField">
+      <component id="5ec98" class="javax.swing.JTextField" binding="usernameTextField">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -16,11 +18,12 @@
         </constraints>
         <properties>
           <text value="Please add user name"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="ce685" class="javax.swing.JTextField" binding="title_textField">
+      <component id="ce685" class="javax.swing.JTextField" binding="titleTextField">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -31,9 +34,9 @@
           <visible value="true"/>
         </properties>
       </component>
-      <component id="76805" class="javax.swing.JTextField" binding="password_textField3">
+      <component id="76805" class="javax.swing.JTextField" binding="passwordTextField">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -41,7 +44,7 @@
           <text value="Please add password"/>
         </properties>
       </component>
-      <component id="499be" class="javax.swing.JTextField" binding="acountnumber_textField">
+      <component id="499be" class="javax.swing.JTextField" binding="acountnumberTextField">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -49,11 +52,12 @@
         </constraints>
         <properties>
           <text value="Please add acount number"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="6e324" class="javax.swing.JComboBox" binding="category_comboBox">
+      <component id="6e324" class="javax.swing.JComboBox" binding="categoryComboBox">
         <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <model/>
@@ -64,10 +68,10 @@
           <grid row="0" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="ADD Page"/>
+          <text value="Add Page"/>
         </properties>
       </component>
-      <component id="7c4d3" class="javax.swing.JTextField" binding="banknumber_textField">
+      <component id="7c4d3" class="javax.swing.JTextField" binding="banknumberTextField">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -75,9 +79,10 @@
         </constraints>
         <properties>
           <text value="Please add bank number"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="e165f" class="javax.swing.JTextField" binding="bankaddress_textField">
+      <component id="e165f" class="javax.swing.JTextField" binding="bankaddressTextField">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -85,11 +90,12 @@
         </constraints>
         <properties>
           <text value="Please add bank address"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="dc0da" class="javax.swing.JTextField" binding="cardnumber_textField">
+      <component id="dc0da" class="javax.swing.JTextField" binding="cardnumberTextField">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="7" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -97,7 +103,7 @@
           <text value="Please add card number"/>
         </properties>
       </component>
-      <component id="8d421" class="javax.swing.JLabel" binding="title_label">
+      <component id="8d421" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -106,15 +112,16 @@
           <visible value="true"/>
         </properties>
       </component>
-      <component id="aa7af" class="javax.swing.JLabel" binding="username_label">
+      <component id="aa7af" class="javax.swing.JLabel" binding="usernameLabel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="User Name"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="9509b" class="javax.swing.JLabel" binding="password_label">
+      <component id="9509b" class="javax.swing.JLabel" binding="passwordLabel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -122,31 +129,34 @@
           <text value="Password"/>
         </properties>
       </component>
-      <component id="7d1dc" class="javax.swing.JLabel" binding="acountnumber_label">
+      <component id="7d1dc" class="javax.swing.JLabel" binding="acountnumberLabel">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Acount Number"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="39a1" class="javax.swing.JLabel" binding="banknumber_label">
+      <component id="39a1" class="javax.swing.JLabel" binding="banknumberLabel">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Bank Number"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="7c5a8" class="javax.swing.JLabel" binding="bankaddress_label">
+      <component id="7c5a8" class="javax.swing.JLabel" binding="bankaddressLabel">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Bank Address"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="1d443" class="javax.swing.JLabel" binding="cardnumber_label">
+      <component id="1d443" class="javax.swing.JLabel" binding="cardnumberLabel">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -154,7 +164,7 @@
           <text value="Card Number"/>
         </properties>
       </component>
-      <component id="71212" class="javax.swing.JLabel" binding="cvv_label">
+      <component id="71212" class="javax.swing.JLabel" binding="cvvLabel">
         <constraints>
           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -162,9 +172,9 @@
           <text value="CVV"/>
         </properties>
       </component>
-      <component id="50b4f" class="javax.swing.JTextField" binding="cvv_textField">
+      <component id="50b4f" class="javax.swing.JTextField" binding="cvvTextField">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="8" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -172,7 +182,7 @@
           <text value="Please add cvv"/>
         </properties>
       </component>
-      <component id="971a6" class="javax.swing.JLabel" binding="expiringdate_label">
+      <component id="971a6" class="javax.swing.JLabel" binding="expiringdateLabel">
         <constraints>
           <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -180,9 +190,9 @@
           <text value="Expiring Date"/>
         </properties>
       </component>
-      <component id="22da2" class="javax.swing.JTextField" binding="expiringdate_textField">
+      <component id="22da2" class="javax.swing.JTextField" binding="expiringdateTextField">
         <constraints>
-          <grid row="9" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="9" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -190,15 +200,16 @@
           <text value="Please add expiring date"/>
         </properties>
       </component>
-      <component id="8c80a" class="javax.swing.JLabel" binding="website_label">
+      <component id="8c80a" class="javax.swing.JLabel" binding="websiteLabel">
         <constraints>
           <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Website"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="fd91b" class="javax.swing.JTextField" binding="email_textField">
+      <component id="fd91b" class="javax.swing.JTextField" binding="emailTextField">
         <constraints>
           <grid row="11" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -206,17 +217,19 @@
         </constraints>
         <properties>
           <text value="Please add email"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="a967f" class="javax.swing.JLabel" binding="email_label">
+      <component id="a967f" class="javax.swing.JLabel" binding="emailLabel">
         <constraints>
           <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Email"/>
+          <visible value="false"/>
         </properties>
       </component>
-      <component id="7624e" class="javax.swing.JTextField" binding="website_textField">
+      <component id="7624e" class="javax.swing.JTextField" binding="websiteTextField">
         <constraints>
           <grid row="10" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -224,6 +237,7 @@
         </constraints>
         <properties>
           <text value="Please add website"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="991cf" class="javax.swing.JLabel">
@@ -234,7 +248,7 @@
           <text value="ScureVault Logo"/>
         </properties>
       </component>
-      <component id="3fc80" class="javax.swing.JLabel" binding="note_label">
+      <component id="3fc80" class="javax.swing.JLabel" binding="noteLabel">
         <constraints>
           <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -242,25 +256,44 @@
           <text value="Note"/>
         </properties>
       </component>
-      <component id="54e05" class="javax.swing.JTextArea" binding="note_textArea">
+      <component id="54e05" class="javax.swing.JTextArea" binding="noteTextArea">
         <constraints>
-          <grid row="12" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="12" column="1" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
         <properties>
-          <caretColor color="-1"/>
+          <caretColor color="-4473925"/>
+          <foreground color="-16777216"/>
           <lineWrap value="false"/>
+          <margin top="1" left="1" bottom="1" right="1"/>
           <text value=""/>
           <wrapStyleWord value="true"/>
         </properties>
       </component>
-      <component id="86a97" class="javax.swing.JButton" binding="add_button">
+      <component id="86a97" class="javax.swing.JButton" binding="addButton">
         <constraints>
-          <grid row="13" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="90" height="25"/>
+            <maximum-size width="90" height="25"/>
+          </grid>
         </constraints>
         <properties>
-          <text value="ADD"/>
+          <actionCommand value="add"/>
+          <label value="Add"/>
+          <text value="Add"/>
+        </properties>
+      </component>
+      <component id="d38b8" class="javax.swing.JButton" binding="cancelButton">
+        <constraints>
+          <grid row="13" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="90" height="25"/>
+            <maximum-size width="90" height="25"/>
+          </grid>
+        </constraints>
+        <properties>
+          <actionCommand value="cancel"/>
+          <text value="Cancel"/>
         </properties>
       </component>
     </children>
