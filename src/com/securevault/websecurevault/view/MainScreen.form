@@ -45,7 +45,9 @@
         <children>
           <component id="fce11" class="javax.swing.JTable" binding="formViewTable">
             <constraints/>
-            <properties/>
+            <properties>
+              <dragEnabled value="false"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

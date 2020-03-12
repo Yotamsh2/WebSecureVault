@@ -60,10 +60,10 @@ public class Add {
                 if("Credit Cards".equals((String) categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
-                    passwordTextField.setVisible(true);
-                    passwordLabel.setVisible(true);
                     cardnumberTextField.setVisible(true);
                     cardnumberLabel.setVisible(true);
+                    passwordTextField.setVisible(true);
+                    passwordLabel.setVisible(true);
                     cvvTextField.setVisible(true);
                     cvvLabel.setVisible(true);
                     expiringdateTextField.setVisible(true);

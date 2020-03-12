@@ -12,12 +12,12 @@ import java.util.logging.Logger;
 
 
 /**Start class runs the main method of the app.
- * It is connecting to the DB and run the main screen of the app.*/
+ * It's connecting to the DB and running the main screen of the app.*/
 public class Start {
 
     public static void main(String[] args) {
         MainScreen mainScreen = new MainScreen();
-        mainScreen.go(); //Create And Show New Main Screen
+        mainScreen.go(mainScreen); //Create And Show New Main Screen
 
         ModelDerbyDB mdDB = new ModelDerbyDB();
         ArrayList<Record> records = mdDB.getRecords("Website");

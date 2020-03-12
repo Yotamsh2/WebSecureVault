@@ -11,11 +11,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://C:/Apache/db-derby-10.14.2.0-bin/lib" />
+          <root url="file://C:/Program Files/Apache/db-derby-10.14.2.0-bin/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://C:/Apache/db-derby-10.14.2.0-bin/lib" recursive="false" />
+        <jarDirectory url="file://C:/Program Files/Apache/db-derby-10.14.2.0-bin/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>
