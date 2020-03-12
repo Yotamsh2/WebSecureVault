@@ -1,6 +1,9 @@
 package com.securevault.websecurevault.model;
 
+import com.securevault.websecurevault.ObjectTypes.Record;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,10 +47,11 @@ public class DBConnection {
 
     }
 
-    public ResultSet getResultSetByCategory (String category) {
+    public ArrayList<Record> getResultSetByCategory (String category) {
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
+        ArrayList<Record> recordsResult = new ArrayList<>();
         Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
 
 
@@ -60,13 +64,14 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Connection got successfully.");
 
             DatabaseMetaData dbm = connection.getMetaData();
-            // check if "records" table is there
-            ResultSet tables = dbm.getTables(null, null, "records", null);
+            // Check if "records" table is in the database
+            ResultSet tables = dbm.getTables(null, null, "RECORDS", null);
             if (tables.next()) {
-                // Table exists
+
             }
             else {
-                initialize();
+                initialize(connection);
+                closeConnection(connection,statement,rs);
                 return null;
             }
 
@@ -80,11 +85,27 @@ public class DBConnection {
                     "SELECT * FROM records WHERE "+COL_CATEGORY+" LIKE '"+category+"' ORDER BY record_id");
             //Scan the resultSet data and print it
             while (rs.next()) {
-                System.out.println("id=" + rs.getInt("record_id") + " , UserID=" + rs.getString("user_id"));
-            }
+                System.out.println("RecordID=" + rs.getInt("record_id") + " , UserID=" + rs.getString("user_id"));
+                String title = rs.getString("title");
+                String cat = rs.getString("category");
+                String user_name  = rs.getString("user_name");
+                String password = rs.getString("password");
+                int account_number = rs.getInt("account_number");
+                int bank_number = rs.getInt("bank_number");
+                String bank_address= rs.getString("bank_address");
+                String note = rs.getString("note");
+                int card_number = rs.getInt("card_number");
+                int cvv = rs.getInt("cvv");
+                String expiring_date= rs.getString("expiring_date");
+                String website = rs.getString("website");
+                String email = rs.getString("email");
+                int record_id = rs.getInt("record_id");
+                String user_id = rs.getString("user_id");
 
-            System.out.println("rs: "+ rs.toString());
-            return rs;
+                Record r = new Record(title,cat,user_name,password,account_number,bank_number,bank_address,note,card_number,cvv,expiring_date,
+                        website,email,record_id,user_id);
+                recordsResult.add(r);
+            }
 
 
 /*
@@ -95,38 +116,35 @@ public class DBConnection {
             e.printStackTrace();
             Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");
         } finally {
-            if (statement != null) try {
-                statement.close();
-            } catch (Exception e) {
-            }
-            if (connection != null) try {
-                connection.close();
-            } catch (Exception e) {
-            }
-            if (rs != null) try {
-                //rs.close();
-
-            } catch (Exception e) {
-            }
+            closeConnection(connection,statement,rs);
         }
-        return rs;
+        return recordsResult;
     }
 
+    private void closeConnection (Connection connection, Statement statement, ResultSet rs){
 
-    public void initialize (){
-        Connection connection = null;
+        if (statement != null) try {
+            statement.close();
+        } catch (Exception e) {
+        }
+        if (connection != null) try {
+            connection.close();
+        } catch (Exception e) {
+        }
+        if (rs != null) try {
+            //rs.close();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void initialize (Connection connection){
         Statement statement = null;
         ResultSet rs = null;
-        Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
 
 
 
         try {
-            //Instantiating the driver class will indirectly register this driver as an available driver for DriverManager
-            Class.forName(driver);
-            //Getting a connection by calling getConnection
-            connection = DriverManager.getConnection(protocol);
-            Logger.getGlobal().log(Level.FINE, "Connection got successfully.");
             //Creating statement
             statement = connection.createStatement();
             Logger.getGlobal().log(Level.FINE, "Statement created.");

@@ -1,9 +1,14 @@
 package com.securevault.websecurevault;
 
+import com.securevault.websecurevault.ObjectTypes.Record;
 import com.securevault.websecurevault.model.ModelDerbyDB;
 import com.securevault.websecurevault.view.MainScreen;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**Start class runs the main method of the app.
@@ -15,10 +20,18 @@ public class Start {
         mainScreen.go(); //Create And Show New Main Screen
 
         ModelDerbyDB mdDB = new ModelDerbyDB();
-        ResultSet rs = mdDB.getRecords("Website");
-        //System.out.println("rs: "+ rs.toString());
-/*
+        ArrayList<Record> records = mdDB.getRecords("Website");
+        if (records == null)
+            Logger.getGlobal().log(Level.SEVERE,"rs is NULL");
+        else {
+            records.forEach(record -> System.out.println(""+ record.toString()));
 
+        }
+
+
+        //System.out.println("rs: "+ rs.toString());
+
+/*
 
         try {
             while (rs.next()) {

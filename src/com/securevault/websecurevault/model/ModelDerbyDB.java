@@ -1,6 +1,9 @@
 package com.securevault.websecurevault.model;
 
+import com.securevault.websecurevault.ObjectTypes.Record;
+
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**Model class is used to implement the ModelInterface methods.
  * It implements three methods that responsible for the connection with the Derby Database.*/
@@ -12,7 +15,7 @@ public class ModelDerbyDB implements ModelInterface {
 
     /**getRecords is returning the ResultSet we wish to get from the database.*/
     @Override
-    public ResultSet getRecords(String category) {
+    public ArrayList<Record> getRecords(String category) {
         DBConnection dbConnection = new DBConnection();
         return dbConnection.getResultSetByCategory(category);
     }
