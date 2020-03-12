@@ -3,13 +3,9 @@ package com.securevault.websecurevault;
 import com.securevault.websecurevault.ObjectTypes.Record;
 import com.securevault.websecurevault.model.ModelDerbyDB;
 import com.securevault.websecurevault.view.MainScreen;
-
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**Start class runs the main method of the app.
  * It's connecting to the DB and running the main screen of the app.*/
@@ -28,11 +24,9 @@ public class Start {
 
         }
 
-
         //System.out.println("rs: "+ rs.toString());
 
 /*
-
         try {
             while (rs.next()) {
                 System.out.println("Record ID = " + rs.getInt("record_id") + ", Category = " + rs.getString("category") +
@@ -40,15 +34,13 @@ public class Start {
                         "Website = " + rs.getString("website") + ", Email = " + rs.getString("email"));
             rs.close();
             }
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 */
 
-
 //        View_MainScreen mainScreen = new View_MainScreen(); //TODO create view class of the main screen
-
 
         //TODO Examples - delete if don't need
         /*
@@ -66,6 +58,5 @@ public class Start {
 
         System.out.println("Logger Name= "+Logger.GLOBAL_LOGGER_NAME);
 */
-
     }
 }
