@@ -23,6 +23,7 @@ public class MainScreen extends JFrame{
     private JPanel topBarPanel;
     private JButton profileButton;
     private JButton addButton;
+    private JButton deleteButton = new JButton("Delete");
     private JButton categoryButton1 = new JButton("Credit Card");
     private JButton categoryButton2 = new JButton("Bank Account");
     private JButton categoryButton3 = new JButton("Social Media");
@@ -94,10 +95,14 @@ public class MainScreen extends JFrame{
         addButton.setMinimumSize(d);
         addButton.setPreferredSize(d);
         addButton.setMaximumSize(d);
+        deleteButton.setMinimumSize(d);
+        deleteButton.setPreferredSize(d);
+        deleteButton.setMaximumSize(d);
 
         //adding components to panels
         flowLeftPanel.add(logoLabel);
         flowLeftPanel.add(usernameLabel);
+        flowRightPanel.add(deleteButton);
         flowRightPanel.add(profileButton);
         flowRightPanel.add(addButton);
         categoryButtonPanel.add(categoryButton1);
@@ -129,6 +134,14 @@ public class MainScreen extends JFrame{
                 Add add = new Add();
                 mainFrame.setEnabled(false);
                 add.go(mainScreen);
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO change to a delete methode frome viewmodel
+                //might not work, havent been tested yet
+                //deleteRecord(formViewTable.getSelectedRow());
             }
         });
         categoryButton1.addActionListener(new ActionListener() {//Credit Card

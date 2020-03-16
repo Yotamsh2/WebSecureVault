@@ -34,6 +34,7 @@ public class Add {
     private JLabel noteLabel;
     private JButton cancelButton;
 
+    //to pass the main screen object to add/profile pages so it could be enabled back after exiting the page
     MainScreen mainToEnable = new MainScreen();
 
 

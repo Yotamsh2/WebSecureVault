@@ -44,7 +44,6 @@ public class DBConnection {
      * Constructor initialize the references of: connection, statement and resultSet(which hold the lines we ask to get from the DB).
      */
     public DBConnection() {
-
     }
 
     public ArrayList<Record> getResultSetByCategory (String category) {
@@ -54,14 +53,12 @@ public class DBConnection {
         ArrayList<Record> recordsResult = new ArrayList<>();
         Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
 
-
-
         try {
             //Instantiating the driver class will indirectly register this driver as an available driver for DriverManager
             Class.forName(driver);
             //Getting a connection by calling getConnection
             connection = DriverManager.getConnection(protocol);
-            Logger.getGlobal().log(Level.FINE, "Connection got successfully.");
+            Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
 
             DatabaseMetaData dbm = connection.getMetaData();
             // Check if "records" table is in the database
@@ -123,6 +120,10 @@ public class DBConnection {
 
     private void closeConnection (Connection connection, Statement statement, ResultSet rs){
 
+        if (rs != null) try {
+            //rs.close();
+        } catch (Exception e) {
+        }
         if (statement != null) try {
             statement.close();
         } catch (Exception e) {
@@ -131,18 +132,11 @@ public class DBConnection {
             connection.close();
         } catch (Exception e) {
         }
-        if (rs != null) try {
-            //rs.close();
-
-        } catch (Exception e) {
-        }
     }
 
     public void initialize (Connection connection){
         Statement statement = null;
         ResultSet rs = null;
-
-
 
         try {
             //Creating statement
