@@ -4,6 +4,7 @@ import com.securevault.websecurevault.ObjectTypes.Record;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,11 +47,11 @@ public class DBConnection {
     public DBConnection() {
     }
 
-    public ArrayList<Record> getResultSetByCategory (String category) {
+    public Vector<Record> getResultSetByCategory (String category) {
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
-        ArrayList<Record> recordsResult = new ArrayList<>();
+        Vector<Record> recordsResult = new Vector<>();
         Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
 
         try {
@@ -64,7 +65,6 @@ public class DBConnection {
             // Check if "records" table is in the database
             ResultSet tables = dbm.getTables(null, null, "RECORDS", null);
             if (tables.next()) {
-
             }
             else {
                 initialize(connection);
@@ -103,8 +103,6 @@ public class DBConnection {
                         website,email,record_id,user_id);
                 recordsResult.add(r);
             }
-
-
 /*
 		//Deleting the table after the check
 		statement.execute("DROP TABLE records");
@@ -116,6 +114,45 @@ public class DBConnection {
             closeConnection(connection,statement,rs);
         }
         return recordsResult;
+    }
+
+    public void addRecordToDB(Record record){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+        Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
+
+        try {
+            Class.forName(driver);
+            connection = DriverManager.getConnection(protocol);
+            Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
+            DatabaseMetaData dbm = connection.getMetaData();
+
+            // Check if "records" table is in the database, and if not creates the table
+            ResultSet tables = dbm.getTables(null, null, "RECORDS", null);
+            if (!tables.next()) {
+                initialize(connection);
+                closeConnection(connection,statement,rs);
+            }
+
+            //Creating statement
+            statement = connection.createStatement();
+            Logger.getGlobal().log(Level.FINE, "Statement created.");
+
+            //Query to execute
+            String query = "insert into records values (" + record.getRecord_id() + ", '" + record.getUser_id() + "', '" + record.getUser_name() + "'" +
+                            ", '" + record.getEmail() + "', '" + record.getWebsite() + "', '" + record.getPassword() + "'" +
+                            ", '" + record.getTitle() + "', '" + record.getNote() + "', " + record.getCard_number() + "" +
+                            ", '" + record.getExpiring_date() + "', " + record.getCvv() + ", " + record.getAccount_number() + "" +
+                            ", '" + record.getBank_address() + "', " + record.getBank_number() + ", '" + record.getCategory() + "')";
+            statement.executeUpdate(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+        } finally {
+            closeConnection(connection,statement,rs);
+        }
     }
 
     private void closeConnection (Connection connection, Statement statement, ResultSet rs){
@@ -142,11 +179,17 @@ public class DBConnection {
             //Creating statement
             statement = connection.createStatement();
             Logger.getGlobal().log(Level.FINE, "Statement created.");
-            //Creating "records" table and 15 columns
-            statement.execute("create table records(" + COL_RECORD_ID + " int," + COL_USER_ID + " varchar(255)," + COL_USERNAME + " varchar(255)," +
+
+            String query = "create table records(" + COL_RECORD_ID + " int," + COL_USER_ID + " varchar(255)," + COL_USERNAME + " varchar(255)," +
                     COL_EMAIL + " varchar(255)," + COL_WEBSITE + " varchar(255)," + COL_PASSWORD + " varchar(255)," + COL_TITLE + " varchar(255)," +
                     COL_NOTE + " varchar(255)," + COL_CARD_NUMBER + " int," + COL_CARD_EXPIRING_DATE + " varchar(255) ," + COL_CVV + " int," +
-                    COL_ACCOUNT_NUMBER + " int," + COL_BANK_ADDRESS + " varchar(255)," + COL_BANK_NUMBER + " int," + COL_CATEGORY + " varchar(255)" + " )");
+                    COL_ACCOUNT_NUMBER + " int," + COL_BANK_ADDRESS + " varchar(255)," + COL_BANK_NUMBER + " int," + COL_CATEGORY + " varchar(255)" + " )";
+
+            System.err.println(query);
+
+            //Creating "records" table and 15 columns
+            statement.execute(query);
+
             Logger.getGlobal().log(Level.FINE, "Table records created.");
             //Creating "users" table and 4 columns
             statement.execute("create table users(" + COL_USER_ID + " varchar(255)," + COL_FIRST_NAME + " varchar(255)," +

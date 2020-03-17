@@ -1,9 +1,11 @@
 package com.securevault.websecurevault;
 
 import com.securevault.websecurevault.ObjectTypes.Record;
+import com.securevault.websecurevault.model.ExceptionMVVM;
 import com.securevault.websecurevault.model.ModelDerbyDB;
 import com.securevault.websecurevault.view.MainScreen;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,15 +15,23 @@ public class Start {
 
     public static void main(String[] args) {
         MainScreen mainScreen = new MainScreen();
-        mainScreen.go(mainScreen); //Create And Show New Main Screen
+        mainScreen.go(mainScreen); //Create And Show Main Screen
 
         ModelDerbyDB mdDB = new ModelDerbyDB();
-        ArrayList<Record> records = mdDB.getRecords("Website");
+        /*Record record1 = new Record("Credit Card Hapoalim","Credit Card","user_name","1234",
+                1234,1234,"","note...",12345678,123 , "1.1.2020",
+                "" , "",100216,"yuval@gmail.com");
+        try {
+            mdDB.addRecord(record1);
+        } catch (ExceptionMVVM exceptionMVVM) {
+            exceptionMVVM.printStackTrace();
+        }*/
+
+        Vector<Record> records = mdDB.getRecords("Credit Card");
         if (records == null)
             Logger.getGlobal().log(Level.SEVERE,"rs is NULL");
         else {
             records.forEach(record -> System.out.println(""+ record.toString()));
-
         }
 
         //System.out.println("rs: "+ rs.toString());

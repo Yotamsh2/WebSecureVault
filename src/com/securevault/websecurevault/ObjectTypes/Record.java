@@ -1,5 +1,7 @@
 package com.securevault.websecurevault.ObjectTypes;
 
+import java.util.Vector;
+
 public class Record {
 
     private String title;
@@ -18,6 +20,25 @@ public class Record {
     private int record_id;
     private String user_id;
 
+    public Vector<String> asVector() {
+        Vector<String> v = new Vector<>();
+        v.add(title);
+        v.add(category);
+        v.add(user_name);
+        v.add(password);
+        v.add(Integer.toString(account_number));
+        v.add(Integer.toString(bank_number));
+        v.add(bank_address);
+        v.add(note);
+        v.add(Integer.toString(card_number));
+        v.add(Integer.toString(cvv));
+        v.add(expiring_date);
+        v.add(website);
+        v.add(email);
+        v.add(Integer.toString(record_id));
+        v.add(user_id);
+        return v;
+    }
 
     public Record(String title, String category, String user_name, String password, int account_number, int bank_number, String bank_address, String note, int card_number, int cvv, String expiring_date, String website, String email, int record_id, String user_id) {
         this.title = title;

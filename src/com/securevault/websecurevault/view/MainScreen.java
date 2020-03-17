@@ -1,11 +1,18 @@
 package com.securevault.websecurevault.view;
 
+import com.securevault.websecurevault.ObjectTypes.Record;
+import com.securevault.websecurevault.viewmodel.ViewModel;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Struct;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.function.ToDoubleBiFunction;
 
 //TODO: make variables camelCase and not snake_case
 //TODO: meaningful variable names
@@ -34,6 +41,8 @@ public class MainScreen extends JFrame{
     static MainScreen mainScreen = new MainScreen();
 
     public MainScreen() {
+        ViewModel viewModel = new ViewModel();//MVVM connection variable
+
         // Initializing components
         mainPanel = new JPanel();
         categoryButtonPanel = new JPanel();
@@ -148,10 +157,20 @@ public class MainScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableLabel.setText("Credit Card");
-                String[] columnNames = { "Title", "Card Number","Password", "CVV","Expiring Date", "Note" };
-                // TODO: 03/03/2020 function that gathers data from db
-                String[][] data = null;
-                tableModel.setDataVector(null, columnNames);
+                Vector<String> columnNames = new Vector<>();
+                columnNames.add("Title");
+                columnNames.add("Card Number");
+                columnNames.add("Password");
+                columnNames.add("CVV");
+                columnNames.add("Expiring Date");
+                columnNames.add("Note");
+                // TODO: 17/03/2020 fix the asVector method to show only by category
+                Vector<Record> records = viewModel.getRecordsByCategory("Credit Card");
+                Vector<Vector<String>> rows = new Vector<>();
+                 for (Record record : records) {
+                    rows.add(record.asVector());
+                }
+                tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
         });
