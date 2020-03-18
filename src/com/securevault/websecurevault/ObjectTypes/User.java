@@ -12,6 +12,8 @@ public class User {
         this.last_name = last_name;
         this.master_pass = master_pass;
     }
+    public User(){
+    }
 
     @Override
     public String toString() {

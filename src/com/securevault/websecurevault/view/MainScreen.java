@@ -1,6 +1,7 @@
 package com.securevault.websecurevault.view;
 
 import com.securevault.websecurevault.ObjectTypes.Record;
+import com.securevault.websecurevault.ObjectTypes.User;
 import com.securevault.websecurevault.viewmodel.ViewModel;
 
 import javax.swing.*;
@@ -39,6 +40,7 @@ public class MainScreen extends JFrame{
     private JButton categoryButton6 = new JButton("Note");
     private JFrame mainFrame = new JFrame();
     static MainScreen mainScreen = new MainScreen();
+    User activeUser = new User();
 
     public MainScreen() {
         ViewModel viewModel = new ViewModel();//MVVM connection variable
@@ -142,7 +144,7 @@ public class MainScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Add add = new Add();
                 mainFrame.setEnabled(false);
-                add.go(mainScreen);
+                add.go(mainScreen,activeUser);
             }
         });
         deleteButton.addActionListener(new ActionListener() {
@@ -164,11 +166,11 @@ public class MainScreen extends JFrame{
                 columnNames.add("CVV");
                 columnNames.add("Expiring Date");
                 columnNames.add("Note");
-                // TODO: 17/03/2020 fix the asVector method to show only by category
+
                 Vector<Record> records = viewModel.getRecordsByCategory("Credit Card");
                 Vector<Vector<String>> rows = new Vector<>();
-                 for (Record record : records) {
-                    rows.add(record.asVector());
+                for (Record record : records) {
+                    rows.add(record.asVector("Credit Card"));
                 }
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
@@ -178,10 +180,21 @@ public class MainScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableLabel.setText("Bank Account");
-                String[] columnNames = { "Title", "User Name", "Password", "Account Number", "Bank Number", "Bank Address", "Note" };
-                // TODO: 03/03/2020 function that gathers data from db
-                String[][] data = null;
-                tableModel.setDataVector(null, columnNames);
+                Vector<String> columnNames = new Vector<>();
+                columnNames.add("Title");
+                columnNames.add("User Name");
+                columnNames.add("Password");
+                columnNames.add("Account Number");
+                columnNames.add("Bank Number");
+                columnNames.add("Bank Address");
+                columnNames.add("Note");
+
+                Vector<Record> records = viewModel.getRecordsByCategory("Bank Account");
+                Vector<Vector<String>> rows = new Vector<>();
+                for (Record record : records) {
+                    rows.add(record.asVector("Bank Account"));
+                }
+                tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
         });
@@ -189,10 +202,20 @@ public class MainScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableLabel.setText("Social Media");
-                String[] columnNames = { "Title", "User Name", "Password", "Website", "Email", "Note" };
-                // TODO: 03/03/2020 function that gathers data from db
-                String[][] data = null;
-                tableModel.setDataVector(null, columnNames);
+                Vector<String> columnNames = new Vector<>();
+                columnNames.add("Title");
+                columnNames.add("User Name");
+                columnNames.add("Password");
+                columnNames.add("Website");
+                columnNames.add("Email");
+                columnNames.add("Note");
+
+                Vector<Record> records = viewModel.getRecordsByCategory("Social Media");
+                Vector<Vector<String>> rows = new Vector<>();
+                for (Record record : records) {
+                    rows.add(record.asVector("Social Media"));
+                }
+                tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
         });
@@ -200,10 +223,20 @@ public class MainScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableLabel.setText("Website and Email");
-                String[] columnNames = { "Title", "User Name", "Password", "Website", "Email", "Note" };
-                // TODO: 03/03/2020 function that gathers data from db
-                String[][] data = null;
-                tableModel.setDataVector(null, columnNames);
+                Vector<String> columnNames = new Vector<>();
+                columnNames.add("Title");
+                columnNames.add("User Name");
+                columnNames.add("Password");
+                columnNames.add("Website");
+                columnNames.add("Email");
+                columnNames.add("Note");
+
+                Vector<Record> records = viewModel.getRecordsByCategory("Website and Email");
+                Vector<Vector<String>> rows = new Vector<>();
+                for (Record record : records) {
+                    rows.add(record.asVector("Website and Email"));
+                }
+                tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
         });
@@ -211,10 +244,20 @@ public class MainScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableLabel.setText("Online Shopping");
-                String[] columnNames = { "Title", "User Name", "Password", "Website", "Email", "Note" };
-                // TODO: 03/03/2020 function that gathers data from db
-                String[][] data = null;
-                tableModel.setDataVector(null, columnNames);
+                Vector<String> columnNames = new Vector<>();
+                columnNames.add("Title");
+                columnNames.add("User Name");
+                columnNames.add("Password");
+                columnNames.add("Website");
+                columnNames.add("Email");
+                columnNames.add("Note");
+
+                Vector<Record> records = viewModel.getRecordsByCategory("Online Shopping");
+                Vector<Vector<String>> rows = new Vector<>();
+                for (Record record : records) {
+                    rows.add(record.asVector("Online Shopping"));
+                }
+                tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
         });
@@ -222,10 +265,16 @@ public class MainScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 tableLabel.setText("Note");
-                String[] columnNames = { "Title", "Note" };
-                // TODO: 03/03/2020 function that gathers data from db
-                String[][] data = null;
-                tableModel.setDataVector(null, columnNames);
+                Vector<String> columnNames = new Vector<>();
+                columnNames.add("Title");
+                columnNames.add("Note");
+
+                Vector<Record> records = viewModel.getRecordsByCategory("Note");
+                Vector<Vector<String>> rows = new Vector<>();
+                for (Record record : records) {
+                    rows.add(record.asVector("Note"));
+                }
+                tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
         });
@@ -236,10 +285,26 @@ public class MainScreen extends JFrame{
         mainFrame.setEnabled(true);
     }
 
-    /**go function is the function that's running the main screen and making it visible.*/
+    /**
+     * secondary go function that is called when exiting the add/profile page and used to enable the main screen back.
+     * this function is running the main screen and making it visible.
+     */
     public void go(MainScreen mainscreen)
     {
         mainScreen=mainscreen;
+        mainFrame.setSize(1000,500);
+        mainFrame.setContentPane(mainPanel);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
+    }
+
+    /**
+     * The main go function that will be called after user has logged in or singed up to the system.
+     * this function is running the main screen and making it visible.
+     */
+    public void go(User user)
+    {
+        activeUser = user;
         mainFrame.setSize(1000,500);
         mainFrame.setContentPane(mainPanel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

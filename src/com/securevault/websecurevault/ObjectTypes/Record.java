@@ -2,6 +2,7 @@ package com.securevault.websecurevault.ObjectTypes;
 
 import java.util.Vector;
 
+
 public class Record {
 
     private String title;
@@ -17,26 +18,47 @@ public class Record {
     private String expiring_date;
     private String website;
     private String email;
-    private int record_id;
+    private Integer record_id;
     private String user_id;
 
-    public Vector<String> asVector() {
+    public Vector<String> asVector(String strCategory) {
         Vector<String> v = new Vector<>();
-        v.add(title);
-        v.add(category);
-        v.add(user_name);
-        v.add(password);
-        v.add(Integer.toString(account_number));
-        v.add(Integer.toString(bank_number));
-        v.add(bank_address);
-        v.add(note);
-        v.add(Integer.toString(card_number));
-        v.add(Integer.toString(cvv));
-        v.add(expiring_date);
-        v.add(website);
-        v.add(email);
-        v.add(Integer.toString(record_id));
-        v.add(user_id);
+        switch(strCategory) {
+            case "Credit Card":
+                v.add(title);
+                v.add(Integer.toString(card_number));
+                v.add(password);
+                v.add(Integer.toString(cvv));
+                v.add(expiring_date);
+                v.add(note);
+                break;
+
+            case "Bank Account":
+                v.add(title);
+                v.add(user_name);
+                v.add(password);
+                v.add(Integer.toString(account_number));
+                v.add(Integer.toString(bank_number));
+                v.add(bank_address);
+                v.add(note);
+                break;
+
+            case "Social Media":
+            case "Website and Email":
+            case "Online Shopping":
+                v.add(title);
+                v.add(user_name);
+                v.add(password);
+                v.add(website);
+                v.add(email);
+                v.add(note);
+                break;
+
+            case "Note":
+                v.add(title);
+                v.add(note);
+                break;
+        }
         return v;
     }
 
@@ -56,6 +78,10 @@ public class Record {
         this.email = email;
         this.record_id = record_id;
         this.user_id = user_id;
+    }
+
+    public Record(){
+
     }
 
     public String getTitle() {
@@ -162,11 +188,11 @@ public class Record {
         this.email = email;
     }
 
-    public int getRecord_id() {
+    public Integer getRecord_id() {
         return record_id;
     }
 
-    public void setRecord_id(int record_id) {
+    public void setRecord_id(Integer record_id) {
         this.record_id = record_id;
     }
 

@@ -1,5 +1,10 @@
 package com.securevault.websecurevault.view;
 
+import com.securevault.websecurevault.ObjectTypes.Record;
+import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.model.ExceptionMVVM;
+import com.securevault.websecurevault.viewmodel.ViewModel;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -36,6 +41,7 @@ public class Add {
 
     //to pass the main screen object to add/profile pages so it could be enabled back after exiting the page
     MainScreen mainToEnable = new MainScreen();
+    User activeUser = new User();
 
 
     public Add() {
@@ -49,6 +55,28 @@ public class Add {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ViewModel viewModel = new ViewModel();
+                Record recordToAdd = new Record();
+                recordToAdd.setCategory((String)categoryComboBox.getSelectedItem());
+                recordToAdd.setUser_id(activeUser.getUser_id());
+                recordToAdd.setRecord_id(null);
+                recordToAdd.setTitle(titleTextField.getText());
+                recordToAdd.setUser_name(usernameTextField.getText());
+                recordToAdd.setPassword(passwordTextField.getText());
+                recordToAdd.setAccount_number(Integer.parseInt(acountnumberTextField.getText()));
+                recordToAdd.setBank_number(Integer.parseInt(banknumberTextField.getText()));
+                recordToAdd.setBank_address(bankaddressTextField.getText());
+                recordToAdd.setCard_number(Integer.parseInt(cardnumberTextField.getText()));
+                recordToAdd.setCvv(Integer.parseInt(cvvTextField.getText()));
+                recordToAdd.setExpiring_date(expiringdateTextField.getText());
+                recordToAdd.setEmail(emailTextField.getText());
+                recordToAdd.setWebsite(websiteTextField.getText());
+                recordToAdd.setNote(noteTextArea.getText());
+                try {
+                    viewModel.insertNewRecord(recordToAdd);
+                } catch (ExceptionMVVM exceptionMVVM) {
+                    exceptionMVVM.printStackTrace();
+                }
                 addpageFrame.dispose();
                 mainToEnable.setFrameEnabled();//enabling the main screen
             }
@@ -58,7 +86,7 @@ public class Add {
         categoryComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if("Credit Cards".equals((String) categoryComboBox.getSelectedItem())) {
+                if("Credit Cards".equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     cardnumberTextField.setVisible(true);
@@ -89,7 +117,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Bank Accounts".equals((String) categoryComboBox.getSelectedItem())) {
+                if("Bank Accounts".equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -120,7 +148,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Social Media".equals((String) categoryComboBox.getSelectedItem())) {
+                if("Social Media".equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -151,7 +179,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Website and Email".equals((String) categoryComboBox.getSelectedItem())) {
+                if("Website and Email".equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -182,7 +210,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Online Shopping".equals((String) categoryComboBox.getSelectedItem())) {
+                if("Online Shopping".equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -213,7 +241,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Notes".equals((String) categoryComboBox.getSelectedItem())) {
+                if("Notes".equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     noteTextArea.setVisible(true);
@@ -254,23 +282,19 @@ public class Add {
         });
     }
 
-    public void go(MainScreen mainScreen)
+    public void go(MainScreen mainScreen, User user)
     {
         this.mainToEnable = mainScreen;
+        this.activeUser = user;
         addpageFrame = new JFrame();
         addpageFrame.setSize(400,450);
         addpageFrame.setContentPane(addpagePanel);
         addpageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addpageFrame.addWindowListener(new WindowAdapter() {//enabling the main screen on close of add page
+        addpageFrame.addWindowListener(new WindowAdapter() {//enabling the main screen when closing add page
             public void windowClosing(WindowEvent evt) {
                 mainToEnable.setFrameEnabled();
             }
         });
         addpageFrame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        Add test = new Add();
-        test.go(null);
     }
 }

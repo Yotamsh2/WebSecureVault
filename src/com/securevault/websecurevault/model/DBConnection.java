@@ -180,7 +180,7 @@ public class DBConnection {
             statement = connection.createStatement();
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
-            String query = "create table records(" + COL_RECORD_ID + " int," + COL_USER_ID + " varchar(255)," + COL_USERNAME + " varchar(255)," +
+            String query = "create table records(" + COL_RECORD_ID + " INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," + COL_USER_ID + " varchar(255)," + COL_USERNAME + " varchar(255)," +
                     COL_EMAIL + " varchar(255)," + COL_WEBSITE + " varchar(255)," + COL_PASSWORD + " varchar(255)," + COL_TITLE + " varchar(255)," +
                     COL_NOTE + " varchar(255)," + COL_CARD_NUMBER + " int," + COL_CARD_EXPIRING_DATE + " varchar(255) ," + COL_CVV + " int," +
                     COL_ACCOUNT_NUMBER + " int," + COL_BANK_ADDRESS + " varchar(255)," + COL_BANK_NUMBER + " int," + COL_CATEGORY + " varchar(255)" + " )";

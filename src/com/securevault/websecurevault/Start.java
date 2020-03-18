@@ -18,6 +18,7 @@ public class Start {
         mainScreen.go(mainScreen); //Create And Show Main Screen
 
         ModelDerbyDB mdDB = new ModelDerbyDB();
+        //added a new Credit Card record to db
         /*Record record1 = new Record("Credit Card Hapoalim","Credit Card","user_name","1234",
                 1234,1234,"","note...",12345678,123 , "1.1.2020",
                 "" , "",100216,"yuval@gmail.com");
@@ -27,7 +28,7 @@ public class Start {
             exceptionMVVM.printStackTrace();
         }*/
 
-        Vector<Record> records = mdDB.getRecords("Credit Card");
+        Vector<Record> records = mdDB.getRecords("Social Media");
         if (records == null)
             Logger.getGlobal().log(Level.SEVERE,"rs is NULL");
         else {
