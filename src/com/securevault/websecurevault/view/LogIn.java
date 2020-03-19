@@ -15,6 +15,8 @@ public class LogIn {
     private JLabel password_label;
     private JLabel securevault_label;
     private JLabel loginpage_label;
+    private JPanel loginPagePanel;
+    private JFrame loginPageFrame;
 
     MainScreen mainScreen = new MainScreen();
     User user = new User();
@@ -24,20 +26,25 @@ public class LogIn {
             public void actionPerformed(ActionEvent e) {
                 // TODO: 18/03/2020 method that checks user credentials and returns the user object/user_id
                 mainScreen.go(user);
+                loginPageFrame.dispose();
             }
         });
-
 
         singUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 18/03/2020 create sign up page starter method
+                SignUp signUp = new SignUp();
+                signUp.go();
+                loginPageFrame.dispose();
             }
         });
     }
 
     public void go(){
-        // TODO: 18/03/2020 make a method to start the login page.
-        //  this page will be the firt page to run when opening the app.
+        loginPageFrame = new JFrame();
+        loginPageFrame.setSize(300,250);
+        loginPageFrame.setContentPane(loginPagePanel);
+        loginPageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loginPageFrame.setVisible(true);
     }
 }

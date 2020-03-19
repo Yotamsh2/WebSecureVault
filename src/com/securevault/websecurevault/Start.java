@@ -3,6 +3,7 @@ package com.securevault.websecurevault;
 import com.securevault.websecurevault.ObjectTypes.Record;
 import com.securevault.websecurevault.model.ExceptionMVVM;
 import com.securevault.websecurevault.model.ModelDerbyDB;
+import com.securevault.websecurevault.view.LogIn;
 import com.securevault.websecurevault.view.MainScreen;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -14,8 +15,10 @@ import java.util.logging.Logger;
 public class Start {
 
     public static void main(String[] args) {
-        MainScreen mainScreen = new MainScreen();
-        mainScreen.go(mainScreen); //Create And Show Main Screen
+        //MainScreen mainScreen = new MainScreen();
+        //mainScreen.go(mainScreen); //Create And Show Main Screen
+        LogIn logIn = new LogIn();
+        logIn.go();
 
         ModelDerbyDB mdDB = new ModelDerbyDB();
         //added a new Credit Card record to db
