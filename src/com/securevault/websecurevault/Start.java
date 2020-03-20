@@ -20,7 +20,7 @@ public class Start {
         LogIn logIn = new LogIn();
         logIn.go();
 
-        ModelDerbyDB mdDB = new ModelDerbyDB();
+        //ModelDerbyDB mdDB = new ModelDerbyDB();
         //added a new Credit Card record to db
         /*Record record1 = new Record("Credit Card Hapoalim","Credit Card","user_name","1234",
                 1234,1234,"","note...",12345678,123 , "1.1.2020",
@@ -31,12 +31,12 @@ public class Start {
             exceptionMVVM.printStackTrace();
         }*/
 
-        Vector<Record> records = mdDB.getRecords("Social Media");
+        /*Vector<Record> records = mdDB.getRecords("Social Media");
         if (records == null)
             Logger.getGlobal().log(Level.SEVERE,"rs is NULL");
         else {
             records.forEach(record -> System.out.println(""+ record.toString()));
-        }
+        }*/
 
         //System.out.println("rs: "+ rs.toString());
 

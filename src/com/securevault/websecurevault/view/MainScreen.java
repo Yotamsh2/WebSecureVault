@@ -167,7 +167,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Expiring Date");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Credit Card");
+                Vector<Record> records = viewModel.getRecordsByCategory("Credit Card", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Credit Card"));
@@ -189,7 +189,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Bank Address");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Bank Account");
+                Vector<Record> records = viewModel.getRecordsByCategory("Bank Account", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Bank Account"));
@@ -210,7 +210,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Social Media");
+                Vector<Record> records = viewModel.getRecordsByCategory("Social Media", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Social Media"));
@@ -231,7 +231,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Website and Email");
+                Vector<Record> records = viewModel.getRecordsByCategory("Website and Email", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Website and Email"));
@@ -252,7 +252,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Online Shopping");
+                Vector<Record> records = viewModel.getRecordsByCategory("Online Shopping", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Online Shopping"));
@@ -269,7 +269,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Title");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Note");
+                Vector<Record> records = viewModel.getRecordsByCategory("Note", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Note"));

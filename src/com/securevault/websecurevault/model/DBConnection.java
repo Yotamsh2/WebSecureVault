@@ -1,6 +1,7 @@
 package com.securevault.websecurevault.model;
 
 import com.securevault.websecurevault.ObjectTypes.Record;
+import com.securevault.websecurevault.ObjectTypes.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class DBConnection {
     public static final String COL_LAST_NAME = "last_name";
     public static final String COL_MASTER_PASS = "master_pass";
 
-
     /**
      * Determine the requested driver and the jdbc protocol
      */
@@ -47,7 +47,7 @@ public class DBConnection {
     public DBConnection() {
     }
 
-    public Vector<Record> getResultSetByCategory (String category) {
+    public Vector<Record> getRecordByCategory(String category, User user) {
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -64,14 +64,11 @@ public class DBConnection {
             DatabaseMetaData dbm = connection.getMetaData();
             // Check if "records" table is in the database
             ResultSet tables = dbm.getTables(null, null, "RECORDS", null);
-            if (tables.next()) {
-            }
-            else {
+            if (!tables.next()) {
                 initialize(connection);
                 closeConnection(connection,statement,rs);
                 return null;
             }
-
 
             //Creating statement
             statement = connection.createStatement();
@@ -79,7 +76,7 @@ public class DBConnection {
 
             //Getting result set by executing query
             rs = statement.executeQuery(
-                    "SELECT * FROM records WHERE "+COL_CATEGORY+" LIKE '"+category+"' ORDER BY record_id");
+                    "SELECT * FROM records WHERE "+COL_CATEGORY+" LIKE '" + category + "' AND "+COL_USER_ID+" LIKE '" + user.getUser_id() + "' ");
             //Scan the resultSet data and print it
             while (rs.next()) {
                 System.out.println("RecordID=" + rs.getInt("record_id") + " , UserID=" + rs.getString("user_id"));
@@ -140,12 +137,11 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
             //Query to execute
-            String query = "insert into records values (" + record.getRecord_id() + ", '" + record.getUser_id() + "', '" + record.getUser_name() + "'" +
+            statement.executeUpdate("insert into records values (" + record.getRecord_id() + ", '" + record.getUser_id() + "', '" + record.getUser_name() + "'" +
                             ", '" + record.getEmail() + "', '" + record.getWebsite() + "', '" + record.getPassword() + "'" +
                             ", '" + record.getTitle() + "', '" + record.getNote() + "', " + record.getCard_number() + "" +
                             ", '" + record.getExpiring_date() + "', " + record.getCvv() + ", " + record.getAccount_number() + "" +
-                            ", '" + record.getBank_address() + "', " + record.getBank_number() + ", '" + record.getCategory() + "')";
-            statement.executeUpdate(query);
+                            ", '" + record.getBank_address() + "', " + record.getBank_number() + ", '" + record.getCategory() + "')");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,6 +149,46 @@ public class DBConnection {
         } finally {
             closeConnection(connection,statement,rs);
         }
+    }
+
+    public void insertNewUserToDB(User user){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+        Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
+
+        try {
+            Class.forName(driver);
+            connection = DriverManager.getConnection(protocol);
+            Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
+            DatabaseMetaData dbm = connection.getMetaData();
+
+            // Check if "users" table is in the database, and if not creates the table
+            ResultSet tables = dbm.getTables(null, null, "USERS", null);
+            if (!tables.next()) {
+                initialize(connection);
+                closeConnection(connection,statement,rs);
+            }
+
+            //Creating statement
+            statement = connection.createStatement();
+            Logger.getGlobal().log(Level.FINE, "Statement created.");
+
+            //Inserting new users to the table
+            statement.executeUpdate("insert into users values ('" + user.getUser_id() + "', '" + user.getFirst_name() + "'," +
+                    " '" + user.getLast_name() + "', '" + user.getMaster_pass() + "')");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+        } finally {
+            closeConnection(connection,statement,rs);
+        }
+    }
+
+    public User getUserFromDB(User user){
+        // TODO: 20/03/2020 make a method to return a user from the db using a given user id
+        return user;
     }
 
     private void closeConnection (Connection connection, Statement statement, ResultSet rs){
@@ -180,17 +216,13 @@ public class DBConnection {
             statement = connection.createStatement();
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
-            String query = "create table records(" + COL_RECORD_ID + " INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," + COL_USER_ID + " varchar(255)," + COL_USERNAME + " varchar(255)," +
+            //Creating "records" table and 15 columns
+            statement.execute("create table records(" + COL_RECORD_ID + " INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," + COL_USER_ID + " varchar(255)," + COL_USERNAME + " varchar(255)," +
                     COL_EMAIL + " varchar(255)," + COL_WEBSITE + " varchar(255)," + COL_PASSWORD + " varchar(255)," + COL_TITLE + " varchar(255)," +
                     COL_NOTE + " varchar(255)," + COL_CARD_NUMBER + " int," + COL_CARD_EXPIRING_DATE + " varchar(255) ," + COL_CVV + " int," +
-                    COL_ACCOUNT_NUMBER + " int," + COL_BANK_ADDRESS + " varchar(255)," + COL_BANK_NUMBER + " int," + COL_CATEGORY + " varchar(255)" + " )";
-
-            System.err.println(query);
-
-            //Creating "records" table and 15 columns
-            statement.execute(query);
-
+                    COL_ACCOUNT_NUMBER + " int," + COL_BANK_ADDRESS + " varchar(255)," + COL_BANK_NUMBER + " int," + COL_CATEGORY + " varchar(255)" + " )");
             Logger.getGlobal().log(Level.FINE, "Table records created.");
+
             //Creating "users" table and 4 columns
             statement.execute("create table users(" + COL_USER_ID + " varchar(255)," + COL_FIRST_NAME + " varchar(255)," +
                     COL_LAST_NAME + " varchar(255)," + COL_MASTER_PASS + " varchar(255)" + " )");

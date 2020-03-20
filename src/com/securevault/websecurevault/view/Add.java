@@ -10,8 +10,9 @@ import java.awt.event.*;
 
 public class Add {
     private JPanel addpagePanel;
-    private JFrame addpageFrame;
+    private JFrame addpageFrame = new JFrame();
     private JButton addButton;
+    private JButton cancelButton;
     private JComboBox<String> categoryComboBox;
     private JTextField usernameTextField;
     private JTextField titleTextField;
@@ -37,12 +38,10 @@ public class Add {
     private JLabel emailLabel;
     private JLabel titleLabel;
     private JLabel noteLabel;
-    private JButton cancelButton;
 
     //to pass the main screen object to add/profile pages so it could be enabled back after exiting the page
     MainScreen mainToEnable = new MainScreen();
     User activeUser = new User();
-
 
     public Add() {
         this.categoryComboBox.addItem("Credit Cards");
@@ -57,6 +56,7 @@ public class Add {
             public void actionPerformed(ActionEvent e) {
                 ViewModel viewModel = new ViewModel();
                 Record recordToAdd = new Record();
+                recordToAdd.setUser_id(activeUser.getUser_id());
                 recordToAdd.setCategory((String)categoryComboBox.getSelectedItem());
                 recordToAdd.setUser_id(activeUser.getUser_id());
                 recordToAdd.setRecord_id(null);
@@ -81,7 +81,6 @@ public class Add {
                 mainToEnable.setFrameEnabled();//enabling the main screen
             }
         });
-
         //changing the displayed components based on combobox option
         categoryComboBox.addItemListener(new ItemListener() {
             @Override
@@ -286,7 +285,6 @@ public class Add {
     {
         this.mainToEnable = mainScreen;
         this.activeUser = user;
-        addpageFrame = new JFrame();
         addpageFrame.setSize(400,450);
         addpageFrame.setContentPane(addpagePanel);
         addpageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

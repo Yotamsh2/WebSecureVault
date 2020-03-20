@@ -7,16 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogIn {
-    private JButton logInButton;
-    private JButton singUpButton;
-    private JTextField username_textField;
-    private JTextField password_textField;
-    private JLabel username_label;
-    private JLabel password_label;
-    private JLabel securevault_label;
-    private JLabel loginpage_label;
     private JPanel loginPagePanel;
     private JFrame loginPageFrame;
+    private JButton logInButton;
+    private JButton singUpButton;
+    private JTextField emailTextField;
+    private JTextField passwordTextField;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
+    private JLabel securevaultLabel;
+    private JLabel loginpageLabel;
+
 
     MainScreen mainScreen = new MainScreen();
     User user = new User();

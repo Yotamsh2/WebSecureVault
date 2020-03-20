@@ -11,8 +11,8 @@ import java.util.Vector;
 public class ViewModel implements ViewModelInterface{
     ModelDerbyDB model = new ModelDerbyDB();
     @Override
-    public Vector<Record> getRecordsByCategory(String category){
-        return model.getRecords(category);
+    public Vector<Record> getRecordsByCategory(String category, User user){
+        return model.getRecords(category, user);
     }
     @Override
     public void insertNewRecord(Record record) throws ExceptionMVVM {
@@ -20,10 +20,8 @@ public class ViewModel implements ViewModelInterface{
     }
 
     @Override
-    public User insertNewUser(User user) {
-        // TODO: 19/03/2020 creat the insertUser method
-        //model.insertUser(user);
-        return null;
+    public void insertNewUser(User user) {
+        model.insertUser(user);
     }
 
     @Override

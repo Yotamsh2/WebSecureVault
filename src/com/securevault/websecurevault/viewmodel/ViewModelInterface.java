@@ -7,9 +7,9 @@ import com.securevault.websecurevault.model.ExceptionMVVM;
 import java.util.Vector;
 
 public interface ViewModelInterface {
-    Vector<Record> getRecordsByCategory(String category);
+    Vector<Record> getRecordsByCategory(String category, User user);
     void insertNewRecord(Record record) throws ExceptionMVVM;
-    User insertNewUser(User user);
+    void insertNewUser(User user);
     User getUser(User user);
 
 }
