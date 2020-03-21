@@ -63,15 +63,26 @@ public class Add {
                 recordToAdd.setTitle(titleTextField.getText());
                 recordToAdd.setUser_name(usernameTextField.getText());
                 recordToAdd.setPassword(passwordTextField.getText());
-                recordToAdd.setAccount_number(Integer.parseInt(acountnumberTextField.getText()));
-                recordToAdd.setBank_number(Integer.parseInt(banknumberTextField.getText()));
                 recordToAdd.setBank_address(bankaddressTextField.getText());
-                recordToAdd.setCard_number(Integer.parseInt(cardnumberTextField.getText()));
-                recordToAdd.setCvv(Integer.parseInt(cvvTextField.getText()));
                 recordToAdd.setExpiring_date(expiringdateTextField.getText());
                 recordToAdd.setEmail(emailTextField.getText());
                 recordToAdd.setWebsite(websiteTextField.getText());
                 recordToAdd.setNote(noteTextArea.getText());
+                if (acountnumberTextField.getText().equals("")) {
+                    recordToAdd.setAccount_number(0);
+                    recordToAdd.setBank_number(0);
+                } else {
+                    recordToAdd.setAccount_number(Integer.parseInt(acountnumberTextField.getText()));
+                    recordToAdd.setBank_number(Integer.parseInt(banknumberTextField.getText()));
+                }
+                if (cardnumberTextField.getText().equals("")) {
+                    recordToAdd.setCard_number(0);
+                    recordToAdd.setCvv(0);
+                } else {
+                    recordToAdd.setCard_number(Integer.parseInt(cardnumberTextField.getText()));
+                    recordToAdd.setCvv(Integer.parseInt(cvvTextField.getText()));
+                }
+
                 try {
                     viewModel.insertNewRecord(recordToAdd);
                 } catch (ExceptionMVVM exceptionMVVM) {

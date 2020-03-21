@@ -75,11 +75,11 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
             //Getting result set by executing query
-            rs = statement.executeQuery(
-                    "SELECT * FROM records WHERE "+COL_CATEGORY+" LIKE '" + category + "' AND "+COL_USER_ID+" LIKE '" + user.getUser_id() + "' ");
+            rs = statement.executeQuery("SELECT * FROM records WHERE " + COL_USER_ID + " LIKE '" + user.getUser_id() + "' AND " + COL_CATEGORY + " LIKE '" + category + "'");
+
             //Scan the resultSet data and print it
             while (rs.next()) {
-                System.out.println("RecordID=" + rs.getInt("record_id") + " , UserID=" + rs.getString("user_id"));
+                //System.out.println("RecordID=" + rs.getInt("record_id") + " , UserID=" + rs.getString("user_id"));
                 String title = rs.getString("title");
                 String cat = rs.getString("category");
                 String user_name  = rs.getString("user_name");
@@ -99,6 +99,30 @@ public class DBConnection {
                 Record r = new Record(title,cat,user_name,password,account_number,bank_number,bank_address,note,card_number,cvv,expiring_date,
                         website,email,record_id,user_id);
                 recordsResult.add(r);
+            }
+            //check printing all records in DB
+            rs = statement.executeQuery("SELECT * FROM records");
+            while (rs.next()) {
+
+                String title = rs.getString("title");
+                String cat = rs.getString("category");
+                String user_name  = rs.getString("user_name");
+                String password = rs.getString("password");
+                int account_number = rs.getInt("account_number");
+                int bank_number = rs.getInt("bank_number");
+                String bank_address= rs.getString("bank_address");
+                String note = rs.getString("note");
+                int card_number = rs.getInt("card_number");
+                int cvv = rs.getInt("cvv");
+                String expiring_date= rs.getString("expiring_date");
+                String website = rs.getString("website");
+                String email = rs.getString("email");
+                int record_id = rs.getInt("record_id");
+                String user_id = rs.getString("user_id");
+
+                Record r = new Record(title,cat,user_name,password,account_number,bank_number,bank_address,note,card_number,cvv,expiring_date,
+                        website,email,record_id,user_id);
+                System.out.println(r.toString());
             }
 /*
 		//Deleting the table after the check
@@ -191,6 +215,60 @@ public class DBConnection {
         return user;
     }
 
+    public User checkUserCredentials(User user){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+        User userToReturn = new User();
+        Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
+
+        try {
+            //Instantiating the driver class will indirectly register this driver as an available driver for DriverManager
+            Class.forName(driver);
+            //Getting a connection by calling getConnection
+            connection = DriverManager.getConnection(protocol);
+            Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
+
+            DatabaseMetaData dbm = connection.getMetaData();
+            // Check if "users" table is in the database, and if not creates the table
+            ResultSet tables = dbm.getTables(null, null, "USERS", null);
+            if (!tables.next()) {
+                initialize(connection);
+                closeConnection(connection,statement,rs);
+            }
+
+            //Creating statement
+            statement = connection.createStatement();
+            Logger.getGlobal().log(Level.FINE, "Statement created.");
+
+            //Getting result set by executing query
+            rs = statement.executeQuery(
+                    "SELECT * FROM users WHERE "+COL_USER_ID+" LIKE '" + user.getUser_id() + "' AND "+COL_MASTER_PASS+" LIKE '" + user.getMaster_pass() + "' ");
+            //Scan the resultSet data and print it
+
+            if (rs.next()) {//checks for a match of user_id and password in the DB
+                userToReturn.setUser_id(rs.getString("user_id"));
+                userToReturn.setFirst_name(rs.getString("first_name"));
+                userToReturn.setLast_name(rs.getString("last_name"));
+                userToReturn.setMaster_pass(rs.getString("master_pass"));
+                Logger.getGlobal().log(Level.FINE, "User correctly authenticated in the DB!.");
+                System.out.println("UserID=" + rs.getString("user_id") + " , FirstName=" + rs.getString("first_name") +
+                        " , LastName=" + rs.getString("last_name") + " , Password=" + rs.getString("master_pass"));
+            } else {
+                userToReturn = null;
+                Logger.getGlobal().log(Level.FINE, "rs came back NULL, no user was found.");
+                System.out.println("rs is NULL, no user was found");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");
+        } finally {
+            closeConnection(connection,statement,rs);
+        }
+        return userToReturn;
+    }
+
     private void closeConnection (Connection connection, Statement statement, ResultSet rs){
 
         if (rs != null) try {
@@ -275,6 +353,8 @@ public class DBConnection {
         }
 
     }
+
+
 
 
 }

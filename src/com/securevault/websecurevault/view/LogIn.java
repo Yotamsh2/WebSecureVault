@@ -1,6 +1,7 @@
 package com.securevault.websecurevault.view;
 
 import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.viewmodel.ViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,15 +20,24 @@ public class LogIn {
     private JLabel loginpageLabel;
 
 
-    MainScreen mainScreen = new MainScreen();
-    User user = new User();
+
     public LogIn() {
         logInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 18/03/2020 method that checks user credentials and returns the user object/user_id
-                mainScreen.go(user);
-                loginPageFrame.dispose();
+                MainScreen mainScreen = new MainScreen();
+                User user = new User();
+                ViewModel viewModel = new ViewModel();
+                user.setUser_id(emailTextField.getText());
+                user.setMaster_pass(passwordTextField.getText());
+                if (viewModel.checkCredentials(user) == null) {
+                    JOptionPane.showMessageDialog(null,"The User Name or Password entered is incorrect.  Please try again.",
+                            "ERROR",JOptionPane.ERROR_MESSAGE,null);
+                }
+                else {
+                    mainScreen.go(user, mainScreen);
+                    loginPageFrame.dispose();
+                }
             }
         });
 

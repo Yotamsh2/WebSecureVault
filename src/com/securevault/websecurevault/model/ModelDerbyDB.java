@@ -34,6 +34,7 @@ public class ModelDerbyDB implements ModelInterface {
 
     }
 
+    /**insertUser method is inserting a new user to the DB, a user who has signed up.*/
     @Override
     public void insertUser(User user) {
         dbConnection.insertNewUserToDB(user);
@@ -42,6 +43,13 @@ public class ModelDerbyDB implements ModelInterface {
     @Override
     public User getUser(User user) {
         return null;
+    }
+
+    /**checkCredentials method is for checking users login credentials,
+     *it checks to see if the user is in the DB and if so log's him in to the system.*/
+    @Override
+    public User checkCredentials(User user) {
+        return dbConnection.checkUserCredentials(user);
     }
 
 }

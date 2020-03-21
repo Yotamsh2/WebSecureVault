@@ -11,9 +11,10 @@ import java.util.Vector;
  * It has three methods that can be implemented for multiple databases*/
 
 public interface ModelInterface {
-    public Vector<Record> getRecords(String category, User user) throws ExceptionMVVM;
-    public void addRecord(Record record) throws ExceptionMVVM;
-    public void deleteRecord(int recordId) throws ExceptionMVVM;
-    public void insertUser(User user);
-    public User getUser(User user);
+    Vector<Record> getRecords(String category, User user) throws ExceptionMVVM;
+    void addRecord(Record record) throws ExceptionMVVM;
+    void deleteRecord(int recordId) throws ExceptionMVVM;
+    void insertUser(User user);
+    User getUser(User user);
+    User checkCredentials(User user);
 }

@@ -11,5 +11,6 @@ public interface ViewModelInterface {
     void insertNewRecord(Record record) throws ExceptionMVVM;
     void insertNewUser(User user);
     User getUser(User user);
+    User checkCredentials(User user);
 
 }

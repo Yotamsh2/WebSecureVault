@@ -30,4 +30,9 @@ public class ViewModel implements ViewModelInterface{
         //model.getUserFromDB(user);
         return null;
     }
+
+    @Override
+    public User checkCredentials(User user) {
+        return model.checkCredentials(user);
+    }
 }

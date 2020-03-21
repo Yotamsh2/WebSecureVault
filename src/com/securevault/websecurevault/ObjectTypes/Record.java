@@ -9,12 +9,12 @@ public class Record {
     private String category;
     private String user_name;
     private String password;
-    private int account_number;
-    private int bank_number;
+    private Integer account_number;
+    private Integer bank_number;
     private String bank_address;
     private String note;
-    private int card_number;
-    private int cvv;
+    private Integer card_number;
+    private Integer cvv;
     private String expiring_date;
     private String website;
     private String email;
@@ -81,7 +81,22 @@ public class Record {
     }
 
     public Record(){
-
+        this.setUser_id(null);
+        this.setCategory(null);
+        this.setUser_id(null);
+        this.setRecord_id(null);
+        this.setTitle(null);
+        this.setUser_name(null);
+        this.setPassword(null);
+        this.setAccount_number(null);
+        this.setBank_number(null);
+        this.setBank_address(null);
+        this.setCard_number(null);
+        this.setCvv(null);
+        this.setExpiring_date(null);
+        this.setEmail(null);
+        this.setWebsite(null);
+        this.setNote(null);
     }
 
     public String getTitle() {
@@ -120,7 +135,7 @@ public class Record {
         return account_number;
     }
 
-    public void setAccount_number(int account_number) {
+    public void setAccount_number(Integer account_number) {
         this.account_number = account_number;
     }
 
@@ -128,7 +143,7 @@ public class Record {
         return bank_number;
     }
 
-    public void setBank_number(int bank_number) {
+    public void setBank_number(Integer bank_number) {
         this.bank_number = bank_number;
     }
 
@@ -152,7 +167,7 @@ public class Record {
         return card_number;
     }
 
-    public void setCard_number(int card_number) {
+    public void setCard_number(Integer card_number) {
         this.card_number = card_number;
     }
 
@@ -160,7 +175,7 @@ public class Record {
         return cvv;
     }
 
-    public void setCvv(int cvv) {
+    public void setCvv(Integer cvv) {
         this.cvv = cvv;
     }
 

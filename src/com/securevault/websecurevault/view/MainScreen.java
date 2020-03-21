@@ -144,7 +144,7 @@ public class MainScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Add add = new Add();
                 mainFrame.setEnabled(false);
-                add.go(mainScreen,activeUser);
+                add.go(mainScreen, activeUser);
             }
         });
         deleteButton.addActionListener(new ActionListener() {
@@ -167,7 +167,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Expiring Date");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Credit Card", activeUser);
+                Vector<Record> records = viewModel.getRecordsByCategory("Credit Cards", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Credit Card"));
@@ -189,7 +189,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Bank Address");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Bank Account", activeUser);
+                Vector<Record> records = viewModel.getRecordsByCategory("Bank Accounts", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Bank Account"));
@@ -269,7 +269,7 @@ public class MainScreen extends JFrame{
                 columnNames.add("Title");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Note", activeUser);
+                Vector<Record> records = viewModel.getRecordsByCategory("Notes", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
                 for (Record record : records) {
                     rows.add(record.asVector("Note"));
@@ -283,18 +283,6 @@ public class MainScreen extends JFrame{
     /**making mainPanel enabled again after being disabled.*/
     public void setFrameEnabled() {
         mainFrame.setEnabled(true);
-    }
-
-    /**
-     * secondary go function that is called when exiting the add/profile page and used to enable the main screen back.
-     * this function is running the main screen and making it visible.
-     */
-    public void go(MainScreen mainscreen)
-    {
-        mainScreen=mainscreen;
-        mainFrame.setSize(1000,500);
-        mainFrame.setContentPane(mainPanel);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }
 
@@ -302,8 +290,9 @@ public class MainScreen extends JFrame{
      * The main go function that will be called after user has logged in or singed up to the system.
      * this function is running the main screen and making it visible.
      */
-    public void go(User user)
+    public void go(User user, MainScreen mainscreen)
     {
+        mainScreen=mainscreen;
         activeUser = user;
         mainFrame.setSize(1000,500);
         mainFrame.setContentPane(mainPanel);

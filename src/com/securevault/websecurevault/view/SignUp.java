@@ -34,7 +34,7 @@ public class SignUp {
                 if(passwordTextField.getText().equals(repeatpassTextField.getText())) {
                     User user = new User(emailTextField.getText(), firstnameTextField.getText(), lastnameTextField.getText(), passwordTextField.getText());
                     viewModel.insertNewUser(user);
-                    mainScreen.go(user);
+                    mainScreen.go(user, mainScreen);
                     signupPageFrame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null,"Your password and confirmation password do not match.","ERROR",JOptionPane.ERROR_MESSAGE,null);

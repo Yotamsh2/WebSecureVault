@@ -17,7 +17,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add user name"/>
+          <text value=""/>
           <visible value="false"/>
         </properties>
       </component>
@@ -30,7 +30,7 @@
         <properties>
           <opaque value="true"/>
           <requestFocusEnabled value="true"/>
-          <text value="Please add title"/>
+          <text value=""/>
           <visible value="true"/>
         </properties>
       </component>
@@ -41,7 +41,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add acount number"/>
+          <text value=""/>
           <visible value="false"/>
         </properties>
       </component>
@@ -68,7 +68,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add bank number"/>
+          <text value=""/>
           <visible value="false"/>
         </properties>
       </component>
@@ -79,7 +79,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add bank address"/>
+          <text value=""/>
           <visible value="false"/>
         </properties>
       </component>
@@ -143,7 +143,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add cvv"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="971a6" class="javax.swing.JLabel" binding="expiringdateLabel">
@@ -161,7 +161,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add expiring date"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="8c80a" class="javax.swing.JLabel" binding="websiteLabel">
@@ -180,7 +180,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add email"/>
+          <text value=""/>
           <visible value="false"/>
         </properties>
       </component>
@@ -200,7 +200,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add website"/>
+          <text value=""/>
           <visible value="false"/>
         </properties>
       </component>
@@ -284,7 +284,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add card number"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="76805" class="javax.swing.JTextField" binding="passwordTextField">
@@ -294,7 +294,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please add password"/>
+          <text value=""/>
         </properties>
       </component>
     </children>
