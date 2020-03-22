@@ -161,11 +161,13 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
             //Query to execute
-            statement.executeUpdate("insert into records values (" + record.getRecord_id() + ", '" + record.getUser_id() + "', '" + record.getUser_name() + "'" +
-                            ", '" + record.getEmail() + "', '" + record.getWebsite() + "', '" + record.getPassword() + "'" +
-                            ", '" + record.getTitle() + "', '" + record.getNote() + "', " + record.getCard_number() + "" +
-                            ", '" + record.getExpiring_date() + "', " + record.getCvv() + ", " + record.getAccount_number() + "" +
-                            ", '" + record.getBank_address() + "', " + record.getBank_number() + ", '" + record.getCategory() + "')");
+            statement.executeUpdate("insert into records (" + COL_USER_ID + ", " + COL_USERNAME + "," + COL_EMAIL + ", " + COL_WEBSITE + "," +
+                    " " + COL_PASSWORD + ", " + COL_TITLE + ", " + COL_NOTE + ", " + COL_CARD_NUMBER + ", " + COL_CARD_EXPIRING_DATE + "," +
+                    " " + COL_CVV + ", " + COL_ACCOUNT_NUMBER + ", " + COL_BANK_ADDRESS + ", " + COL_BANK_NUMBER + ", " + COL_CATEGORY + ") " +
+                    "values ('" + record.getUser_id() + "', '" + record.getUser_name() + "', '" + record.getEmail() + "', '" + record.getWebsite() + "'," +
+                    " '" + record.getPassword() + "', '" + record.getTitle() + "', '" + record.getNote() + "', " + record.getCard_number() + "," +
+                    " '" + record.getExpiring_date() + "', " + record.getCvv() + ", " + record.getAccount_number() + ", '" + record.getBank_address() + "'," +
+                    " " + record.getBank_number() + ", '" + record.getCategory() + "')");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -308,12 +310,10 @@ public class DBConnection {
 
 
             //Inserting new records with values to the table
-            statement.executeUpdate("insert into records values (100215, 'yotamsh2@gmail.com','userName','Email','','','','',9,'',10,11,'',12,'Website')");
-            statement.executeUpdate("insert into records values (100214, 'yuval@gmail.com','userName','Email','','','','',9,'',10,11,'',12,'Social Media')");
-            statement.executeUpdate("insert into records values (100213, 'yuval@gmail.com','userName','Email','','','','',9,'',10,11,'',12,'Website')");
+
             //Inserting new users to the table
             statement.executeUpdate("insert into users values ('yotamsh2@gmail.com','Yotam','Shoval','*******')");
-            statement.executeUpdate("insert into users values ('yuval@gmail.com','Yuval','Nir','**********')");
+            statement.executeUpdate("insert into users values ('master','Yuval','Nir','1234')");
             Logger.getGlobal().log(Level.FINE, "Data created in records and in users.");
 
             //Getting result set by executing query

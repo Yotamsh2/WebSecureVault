@@ -7,24 +7,25 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Profile {
-    private JLabel securevaultLabel;
-    private JTextField usernameTextField;
-    private JTextField emailTextField;
-    private JTextField newpasswordTextField;
-    private JTextField repeatpasswordTextField;
+    private JFrame profilepageFrame;
+    private JPanel profilepagePanel;
     private JButton saveButton;
     private JButton returnButton;
-    private JLabel usernameLabel;
-    private JLabel emailLabel;
-    private JPanel profilepagePanel;
+    private JTextField firstnameTextField;
+    private JTextField emailTextField;
     private JTextField currentpasswordTextField;
+    private JTextField newpasswordTextField;
+    private JTextField repeatpasswordTextField;
+    private JTextField lastnameTextField;
+    private JLabel securevaultLabel;
+    private JLabel firstnameLabel;
+    private JLabel emailLabel;
     private JLabel currentpasswordLabel;
     private JLabel newpasswordLabel;
     private JLabel repeatpasswordLabel;
-    private JFrame profilepageFrame;
+    private JLabel lastnameLabel;
 
     MainScreen mainToEnable = new MainScreen();
-
 
     public Profile() {
         returnButton.addActionListener(new ActionListener() {

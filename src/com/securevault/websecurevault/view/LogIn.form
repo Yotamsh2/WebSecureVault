@@ -49,7 +49,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please enter email"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="fb4b4" class="javax.swing.JTextField" binding="passwordTextField">
@@ -59,7 +59,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Please enter password"/>
+          <text value=""/>
         </properties>
       </component>
       <hspacer id="a2119">
