@@ -37,7 +37,7 @@ public class SignUp {
                     mainScreen.go(user, mainScreen);
                     signupPageFrame.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null,"Your password and confirmation password do not match.","ERROR",JOptionPane.ERROR_MESSAGE,null);
+                    JOptionPane.showMessageDialog(null,"Password and confirmation password do not match.","ERROR",JOptionPane.ERROR_MESSAGE,null);
                 }
             }
         });

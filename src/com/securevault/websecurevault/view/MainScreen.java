@@ -136,7 +136,7 @@ public class MainScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Profile profile = new Profile();
                 mainFrame.setEnabled(false);
-                profile.go(mainScreen);
+                profile.go(mainScreen, activeUser);
             }
         });
         addButton.addActionListener(new ActionListener() {

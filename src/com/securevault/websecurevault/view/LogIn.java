@@ -30,7 +30,8 @@ public class LogIn {
                 ViewModel viewModel = new ViewModel();
                 user.setUser_id(emailTextField.getText());
                 user.setMaster_pass(passwordTextField.getText());
-                if (viewModel.checkCredentials(user) == null) {
+                user = viewModel.checkCredentials(user);
+                if (user.getUser_id() == null) {
                     JOptionPane.showMessageDialog(null,"The User Name or Password entered is incorrect.  Please try again.",
                             "ERROR",JOptionPane.ERROR_MESSAGE,null);
                 }

@@ -15,6 +15,6 @@ public interface ModelInterface {
     void addRecord(Record record) throws ExceptionMVVM;
     void deleteRecord(int recordId) throws ExceptionMVVM;
     void insertUser(User user);
-    User getUser(User user);
+    boolean updateUserCredentials(User user);
     User checkCredentials(User user);
 }

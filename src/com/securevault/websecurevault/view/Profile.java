@@ -1,5 +1,8 @@
 package com.securevault.websecurevault.view;
 
+import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.viewmodel.ViewModel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +29,7 @@ public class Profile {
     private JLabel lastnameLabel;
 
     MainScreen mainToEnable = new MainScreen();
+    User activeUser = new User();
 
     public Profile() {
         returnButton.addActionListener(new ActionListener() {
@@ -35,11 +39,44 @@ public class Profile {
                 mainToEnable.setFrameEnabled();//enabling the main screen
             }
         });
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                User userToUpdate = activeUser;
+                ViewModel viewModel = new ViewModel();
+                if (!emailTextField.getText().equals(""))
+                    userToUpdate.setUser_id(emailTextField.getText());
+                if (!firstnameTextField.getText().equals(""))
+                    userToUpdate.setFirst_name(firstnameTextField.getText());
+                if (!lastnameTextField.getText().equals(""))
+                    userToUpdate.setLast_name(lastnameTextField.getText());
+                if (!currentpasswordTextField.getText().equals("")){
+                    if (currentpasswordTextField.getText().equals(activeUser.getMaster_pass())) {
+                        if (newpasswordTextField.getText().equals(repeatpasswordTextField.getText()))
+                            userToUpdate.setMaster_pass(newpasswordTextField.getText());
+                        else { JOptionPane.showMessageDialog(null,"Password and confirmation password do not match.",
+                                    "ERROR",JOptionPane.ERROR_MESSAGE,null); }
+                    }
+                    else { JOptionPane.showMessageDialog(null,"Current password is incorrect.",
+                                "ERROR",JOptionPane.ERROR_MESSAGE,null); }
+                }
+                if (viewModel.updateUser(userToUpdate)) {
+                    activeUser = userToUpdate;
+                    JOptionPane.showMessageDialog(null,"Updated user information successfully.",
+                            "Success",JOptionPane.PLAIN_MESSAGE,null);
+                }
+                else JOptionPane.showMessageDialog(null,"Update fail.",
+                        "ERROR",JOptionPane.ERROR_MESSAGE,null);
+
+            }
+        });
     }
 
-    public void go(MainScreen mainScreen)
+    public void go(MainScreen mainScreen, User user)
     {
-        this.mainToEnable = mainScreen;
+        activeUser = user;
+        System.out.println("email: "+activeUser.getUser_id()+"first name: "+activeUser.getFirst_name()+"last name: "+activeUser.getLast_name()+"pass: "+activeUser.getMaster_pass());
+        mainToEnable = mainScreen;
         profilepageFrame = new JFrame();
         profilepageFrame.setSize(400,450);
         profilepageFrame.setContentPane(profilepagePanel);
@@ -49,6 +86,9 @@ public class Profile {
                 mainToEnable.setFrameEnabled();
             }
         });
+        emailTextField.setText(activeUser.getUser_id());
+        firstnameTextField.setText(activeUser.getFirst_name());
+        lastnameTextField.setText(activeUser.getLast_name());
         profilepageFrame.setVisible(true);
     }
 }

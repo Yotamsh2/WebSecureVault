@@ -31,7 +31,6 @@ public class ModelDerbyDB implements ModelInterface {
     @Override
     public void deleteRecord(int recordId) throws ExceptionMVVM {
         // TODO Auto-generated method stub
-
     }
 
     /**insertUser method is inserting a new user to the DB, a user who has signed up.*/
@@ -40,9 +39,10 @@ public class ModelDerbyDB implements ModelInterface {
         dbConnection.insertNewUserToDB(user);
     }
 
+    /**updateUserCredentials method is updating the user information  used in the profile page.*/
     @Override
-    public User getUser(User user) {
-        return null;
+    public boolean updateUserCredentials(User user) {
+        return dbConnection.updateUserCredentials(user);
     }
 
     /**checkCredentials method is for checking users login credentials,

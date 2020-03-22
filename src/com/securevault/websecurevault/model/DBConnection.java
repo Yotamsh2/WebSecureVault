@@ -9,10 +9,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * DBConnection class creates connection with the database so we can add, delete or get data from it.
- * Also in case the derby database not created yet - it creates the DB and a table.
- */
+/**DBConnection class creates connection with the database so we can add, delete or get data from it.
+ * Also in case the derby database not created yet - it creates the DB and a table.*/
 public class DBConnection {
     //Initiate the names of the records columns
     public static final String COL_TITLE = "title";
@@ -35,15 +33,11 @@ public class DBConnection {
     public static final String COL_LAST_NAME = "last_name";
     public static final String COL_MASTER_PASS = "master_pass";
 
-    /**
-     * Determine the requested driver and the jdbc protocol
-     */
+    /**Determine the requested driver and the jdbc protocol*/
     public static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     public static String protocol = "jdbc:derby:secureVaultDB;create=true";
 
-    /**
-     * Constructor initialize the references of: connection, statement and resultSet(which hold the lines we ask to get from the DB).
-     */
+    /**Constructor initialize the references of: connection, statement and resultSet(which hold the lines we ask to get from the DB).*/
     public DBConnection() {
     }
 
@@ -60,15 +54,7 @@ public class DBConnection {
             //Getting a connection by calling getConnection
             connection = DriverManager.getConnection(protocol);
             Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
-
             DatabaseMetaData dbm = connection.getMetaData();
-            // Check if "records" table is in the database
-            ResultSet tables = dbm.getTables(null, null, "RECORDS", null);
-            if (!tables.next()) {
-                initialize(connection);
-                closeConnection(connection,statement,rs);
-                return null;
-            }
 
             //Creating statement
             statement = connection.createStatement();
@@ -212,9 +198,34 @@ public class DBConnection {
         }
     }
 
-    public User getUserFromDB(User user){
-        // TODO: 20/03/2020 make a method to return a user from the db using a given user id
-        return user;
+    public boolean updateUserCredentials(User user){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+        Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
+
+        try {
+            Class.forName(driver);
+            connection = DriverManager.getConnection(protocol);
+            Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
+            DatabaseMetaData dbm = connection.getMetaData();
+
+            //Creating statement
+            statement = connection.createStatement();
+            Logger.getGlobal().log(Level.FINE, "Statement created.");
+
+            //updating user in table
+            statement.executeUpdate("update users set "+COL_USER_ID+" = '" + user.getUser_id() + "', "+COL_FIRST_NAME+" = '" + user.getFirst_name() + "'," +
+                    " " +COL_LAST_NAME + " = '" + user.getLast_name() + "', "+COL_MASTER_PASS+" = '" + user.getMaster_pass() + "' " +
+                    "where "+COL_USER_ID+" like '" + user.getUser_id() + "' ");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+            return false;
+        } finally {
+            closeConnection(connection,statement,rs);
+        }
+        return true;
     }
 
     public User checkUserCredentials(User user){
@@ -232,32 +243,26 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
 
             DatabaseMetaData dbm = connection.getMetaData();
-            // Check if "users" table is in the database, and if not creates the table
-            ResultSet tables = dbm.getTables(null, null, "USERS", null);
-            if (!tables.next()) {
-                initialize(connection);
-                closeConnection(connection,statement,rs);
-            }
 
             //Creating statement
             statement = connection.createStatement();
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
-            //Getting result set by executing query
+            //checks for a match of user_id and password in the DB
             rs = statement.executeQuery(
                     "SELECT * FROM users WHERE "+COL_USER_ID+" LIKE '" + user.getUser_id() + "' AND "+COL_MASTER_PASS+" LIKE '" + user.getMaster_pass() + "' ");
-            //Scan the resultSet data and print it
 
-            if (rs.next()) {//checks for a match of user_id and password in the DB
+            if (rs.next()) {
                 userToReturn.setUser_id(rs.getString("user_id"));
                 userToReturn.setFirst_name(rs.getString("first_name"));
                 userToReturn.setLast_name(rs.getString("last_name"));
                 userToReturn.setMaster_pass(rs.getString("master_pass"));
                 Logger.getGlobal().log(Level.FINE, "User correctly authenticated in the DB!.");
+                //printing the user for debugging
                 System.out.println("UserID=" + rs.getString("user_id") + " , FirstName=" + rs.getString("first_name") +
                         " , LastName=" + rs.getString("last_name") + " , Password=" + rs.getString("master_pass"));
             } else {
-                userToReturn = null;
+                userToReturn.setUser_id(null);
                 Logger.getGlobal().log(Level.FINE, "rs came back NULL, no user was found.");
                 System.out.println("rs is NULL, no user was found");
             }
@@ -312,7 +317,6 @@ public class DBConnection {
             //Inserting new records with values to the table
 
             //Inserting new users to the table
-            statement.executeUpdate("insert into users values ('yotamsh2@gmail.com','Yotam','Shoval','*******')");
             statement.executeUpdate("insert into users values ('master','Yuval','Nir','1234')");
             Logger.getGlobal().log(Level.FINE, "Data created in records and in users.");
 
