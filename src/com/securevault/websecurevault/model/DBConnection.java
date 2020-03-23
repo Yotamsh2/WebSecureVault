@@ -135,13 +135,6 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
             DatabaseMetaData dbm = connection.getMetaData();
 
-            // Check if "records" table is in the database, and if not creates the table
-            ResultSet tables = dbm.getTables(null, null, "RECORDS", null);
-            if (!tables.next()) {
-                initialize(connection);
-                closeConnection(connection,statement,rs);
-            }
-
             //Creating statement
             statement = connection.createStatement();
             Logger.getGlobal().log(Level.FINE, "Statement created.");
@@ -155,6 +148,33 @@ public class DBConnection {
                     " '" + record.getExpiring_date() + "', " + record.getCvv() + ", " + record.getAccount_number() + ", '" + record.getBank_address() + "'," +
                     " " + record.getBank_number() + ", '" + record.getCategory() + "')");
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+        } finally {
+            closeConnection(connection,statement,rs);
+        }
+    }
+
+    public void deleteRecordFromDB(int recordId){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+        Logger.getGlobal().log(Level.FINE, "Connection, Statement and ResultSet initialized to null.");
+
+        try {
+            Class.forName(driver);
+            connection = DriverManager.getConnection(protocol);
+            Logger.getGlobal().log(Level.FINE, "Connection was made successfully.");
+            DatabaseMetaData dbm = connection.getMetaData();
+
+            //Creating statement
+            statement = connection.createStatement();
+            Logger.getGlobal().log(Level.FINE, "Statement created.");
+
+            //Query to execute
+            statement.executeUpdate("delete from records where "+COL_RECORD_ID+" = "+recordId+"");
+            Logger.getGlobal().log(Level.SEVERE,"Record deleted from DB.");
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");

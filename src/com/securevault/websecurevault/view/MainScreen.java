@@ -2,6 +2,7 @@ package com.securevault.websecurevault.view;
 
 import com.securevault.websecurevault.ObjectTypes.Record;
 import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.model.ExceptionMVVM;
 import com.securevault.websecurevault.viewmodel.ViewModel;
 
 import javax.swing.*;
@@ -39,8 +40,12 @@ public class MainScreen extends JFrame{
     private JButton categoryButton5 = new JButton("Online Shopping");
     private JButton categoryButton6 = new JButton("Note");
     private JFrame mainFrame = new JFrame();
+
     static MainScreen mainScreen = new MainScreen();
     User activeUser = new User();
+    private Vector<Record> records;
+    private int selectedRecordIndex;
+    private Vector<String> columnNamesToRefresh = new Vector<>();
 
     public MainScreen() {
         ViewModel viewModel = new ViewModel();//MVVM connection variable
@@ -50,6 +55,7 @@ public class MainScreen extends JFrame{
         categoryButtonPanel = new JPanel();
         tablePanel = new JPanel();
         topBarPanel = new JPanel();
+        this.selectedRecordIndex = 0;
 
         //data test
         String[][] data = {
@@ -150,9 +156,19 @@ public class MainScreen extends JFrame{
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO change to a delete methode frome viewmodel
-                //might not work, havent been tested yet
-                //deleteRecord(formViewTable.getSelectedRow());
+                try {
+                    selectedRecordIndex = records.get(formViewTable.getSelectedRow()).getRecord_id();
+                    viewModel.deleteRecord(selectedRecordIndex);
+                } catch (ExceptionMVVM exceptionMVVM) {
+                    exceptionMVVM.printStackTrace();
+                }
+                // TODO: 23/03/2020 check why the refresh function doesn't work
+                records.remove(formViewTable.getSelectedRow());
+                records.forEach(record -> System.out.println(record.toString()));
+                Vector<Vector<String>> rowsToRefresh = new Vector<>();
+                records.forEach(record -> rowsToRefresh.add(record.asVector(record.getCategory())));
+                tableModel.setDataVector(rowsToRefresh, columnNamesToRefresh);
+                formViewTable.setModel(tableModel);
             }
         });
         categoryButton1.addActionListener(new ActionListener() {//Credit Card
@@ -166,12 +182,11 @@ public class MainScreen extends JFrame{
                 columnNames.add("CVV");
                 columnNames.add("Expiring Date");
                 columnNames.add("Note");
+                columnNamesToRefresh = columnNames;
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Credit Cards", activeUser);
+                records = viewModel.getRecordsByCategory("Credit Cards", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                for (Record record : records) {
-                    rows.add(record.asVector("Credit Card"));
-                }
+                records.forEach(record -> rows.add(record.asVector("Credit Card")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -189,11 +204,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Bank Address");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Bank Accounts", activeUser);
+                records = viewModel.getRecordsByCategory("Bank Accounts", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                for (Record record : records) {
-                    rows.add(record.asVector("Bank Account"));
-                }
+                records.forEach(record -> rows.add(record.asVector("Bank Account")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -210,11 +223,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Social Media", activeUser);
+                records = viewModel.getRecordsByCategory("Social Media", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                for (Record record : records) {
-                    rows.add(record.asVector("Social Media"));
-                }
+                records.forEach(record -> rows.add(record.asVector("Social Media")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -231,11 +242,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Website and Email", activeUser);
+                records = viewModel.getRecordsByCategory("Website and Email", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                for (Record record : records) {
-                    rows.add(record.asVector("Website and Email"));
-                }
+                records.forEach(record -> rows.add(record.asVector("Website and Email")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -252,11 +261,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Online Shopping", activeUser);
+                records = viewModel.getRecordsByCategory("Online Shopping", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                for (Record record : records) {
-                    rows.add(record.asVector("Online Shopping"));
-                }
+                records.forEach(record -> rows.add(record.asVector("Online Shopping")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -268,12 +275,11 @@ public class MainScreen extends JFrame{
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("Note");
+                columnNamesToRefresh = columnNames;
 
-                Vector<Record> records = viewModel.getRecordsByCategory("Notes", activeUser);
+                records = viewModel.getRecordsByCategory("Notes", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                for (Record record : records) {
-                    rows.add(record.asVector("Note"));
-                }
+                records.forEach(record -> rows.add(record.asVector("Note")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }

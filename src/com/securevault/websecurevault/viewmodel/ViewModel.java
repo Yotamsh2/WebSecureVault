@@ -22,6 +22,11 @@ public class ViewModel implements ViewModelInterface{
     }
 
     @Override
+    public void deleteRecord(int recordId) throws ExceptionMVVM {
+        model.deleteRecord(recordId);
+    }
+
+    @Override
     public void insertNewUser(User user) {
         model.insertUser(user);
     }

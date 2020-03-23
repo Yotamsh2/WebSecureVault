@@ -26,11 +26,11 @@ public class ModelDerbyDB implements ModelInterface {
         dbConnection.addRecordToDB(record);
     }
 
-    /**deleteItem is deleting the item we wish to delete from the database.
+    /**deleteItem is deleting the item we wish to delete from the database by using it's id.
      * It has no return value*/
     @Override
     public void deleteRecord(int recordId) throws ExceptionMVVM {
-        // TODO Auto-generated method stub
+        dbConnection.deleteRecordFromDB(recordId);
     }
 
     /**insertUser method is inserting a new user to the DB, a user who has signed up.*/
