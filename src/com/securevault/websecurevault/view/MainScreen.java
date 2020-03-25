@@ -18,11 +18,12 @@ import java.util.Vector;
 //TODO: meaningful variable names
 //TODO: make panels final with initalization
 public class MainScreen extends JFrame{
-    private JPanel flowLeftPanel = new JPanel();
+    private JFrame mainFrame = new JFrame();
     private JLabel usernameLabel = new JLabel();
     private JLabel logoLabel;
     private JLabel tableLabel = new JLabel(Category.creditCards);
     private JPanel mainPanel;
+    private JPanel flowLeftPanel = new JPanel();
     private JPanel flowRightPanel = new JPanel();
     private JPanel categoryButtonPanel;
     private JPanel tablePanel;
@@ -36,9 +37,9 @@ public class MainScreen extends JFrame{
     private JButton categoryButton4 = new JButton(Category.websitesAndEmails);
     private JButton categoryButton5 = new JButton(Category.onlineShopping);
     private JButton categoryButton6 = new JButton(Category.notes);
-    private JFrame mainFrame = new JFrame();
 
     static MainScreen mainScreen = new MainScreen();
+    private ViewModel viewModel = new ViewModel();//MVVM connection variable
     private User activeUser = new User(); //the user that logged in to the system
     private Vector<Record> records;
     private int selectedRecordIndex;
@@ -46,8 +47,6 @@ public class MainScreen extends JFrame{
 
     private JTable formViewTable = new JTable();
     DefaultTableModel tableModel = new DefaultTableModel();
-
-    ViewModel viewModel = new ViewModel();//MVVM connection variable
 
     public MainScreen() {
 
@@ -264,8 +263,7 @@ public class MainScreen extends JFrame{
      * The main go function will be called after user has logged in or singed up to the system.
      * this function is running the main screen and making it visible.
      */
-    public void go(User user, MainScreen mainscreen)
-    {
+    public void go(User user, MainScreen mainscreen) {
         mainScreen = mainscreen;
         activeUser = user;
         mainFrame.setSize(1000,500);

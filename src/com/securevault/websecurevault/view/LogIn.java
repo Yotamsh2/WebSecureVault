@@ -19,8 +19,6 @@ public class LogIn {
     private JLabel securevaultLabel;
     private JLabel loginpageLabel;
 
-
-
     public LogIn() {
         logInButton.addActionListener(new ActionListener() {
             @Override
