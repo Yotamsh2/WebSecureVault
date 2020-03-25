@@ -1,6 +1,6 @@
 package com.securevault.websecurevault.view;
 
-import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.Utilities.User;
 import com.securevault.websecurevault.viewmodel.ViewModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;

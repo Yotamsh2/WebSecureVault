@@ -1,10 +1,10 @@
 package com.securevault.websecurevault.model;
 
-import com.securevault.websecurevault.ObjectTypes.Record;
-import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.Utilities.ColumnNames;
+import com.securevault.websecurevault.Utilities.Record;
+import com.securevault.websecurevault.Utilities.User;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -173,7 +173,7 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Statement created.");
 
             //Query to execute
-            statement.executeUpdate("delete from records where "+COL_RECORD_ID+" = "+recordId+"");
+            statement.executeUpdate("delete from records where "+ ColumnNames.recordId +" = "+recordId+"");
             Logger.getGlobal().log(Level.SEVERE,"Record deleted from DB.");
         } catch (Exception e) {
             e.printStackTrace();

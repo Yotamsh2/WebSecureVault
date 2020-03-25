@@ -1,4 +1,4 @@
-package com.securevault.websecurevault.ObjectTypes;
+package com.securevault.websecurevault.Utilities;
 
 public class User {
     private String user_id;

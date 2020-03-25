@@ -1,11 +1,10 @@
 package com.securevault.websecurevault.viewmodel;
 
-import com.securevault.websecurevault.ObjectTypes.Record;
-import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.Utilities.Record;
+import com.securevault.websecurevault.Utilities.User;
 import com.securevault.websecurevault.model.ExceptionMVVM;
 import com.securevault.websecurevault.model.ModelDerbyDB;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class ViewModel implements ViewModelInterface{

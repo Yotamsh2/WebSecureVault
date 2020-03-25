@@ -1,7 +1,7 @@
 package com.securevault.websecurevault.model;
 
-import com.securevault.websecurevault.ObjectTypes.Record;
-import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.Utilities.Record;
+import com.securevault.websecurevault.Utilities.User;
 
 import java.util.Vector;
 

@@ -1,14 +1,6 @@
 package com.securevault.websecurevault;
 
-import com.securevault.websecurevault.ObjectTypes.Record;
-import com.securevault.websecurevault.model.ExceptionMVVM;
-import com.securevault.websecurevault.model.ModelDerbyDB;
 import com.securevault.websecurevault.view.LogIn;
-import com.securevault.websecurevault.view.MainScreen;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**Start class runs the main method of the app.
  * It's connecting to the DB and running the main screen of the app.*/

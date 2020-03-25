@@ -1,7 +1,7 @@
 package com.securevault.websecurevault.view;
 
-import com.securevault.websecurevault.ObjectTypes.Record;
-import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.Utilities.Record;
+import com.securevault.websecurevault.Utilities.User;
 import com.securevault.websecurevault.model.ExceptionMVVM;
 import com.securevault.websecurevault.viewmodel.ViewModel;
 
@@ -11,10 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Struct;
-import java.util.ArrayList;
 import java.util.Vector;
-import java.util.function.ToDoubleBiFunction;
 
 //TODO: make variables camelCase and not snake_case
 //TODO: meaningful variable names
@@ -174,7 +171,7 @@ public class MainScreen extends JFrame{
         categoryButton1.addActionListener(new ActionListener() {//Credit Card
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Credit Card");
+                tableLabel.setText("Credit Cards");
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("Card Number");
@@ -186,7 +183,7 @@ public class MainScreen extends JFrame{
 
                 records = viewModel.getRecordsByCategory("Credit Cards", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Credit Card")));
+                records.forEach(record -> rows.add(record.asVector("Credit Cards")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -194,7 +191,7 @@ public class MainScreen extends JFrame{
         categoryButton2.addActionListener(new ActionListener() {//Bank Account
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Bank Account");
+                tableLabel.setText("Bank Accounts");
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("User Name");
@@ -206,7 +203,7 @@ public class MainScreen extends JFrame{
 
                 records = viewModel.getRecordsByCategory("Bank Accounts", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Bank Account")));
+                records.forEach(record -> rows.add(record.asVector("Bank Accounts")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -233,7 +230,7 @@ public class MainScreen extends JFrame{
         categoryButton4.addActionListener(new ActionListener() {//Website and Email
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Website and Email");
+                tableLabel.setText("Websites and Emails");
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("User Name");
@@ -271,7 +268,7 @@ public class MainScreen extends JFrame{
         categoryButton6.addActionListener(new ActionListener() {//Note
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Note");
+                tableLabel.setText("Notes");
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("Note");
@@ -279,7 +276,7 @@ public class MainScreen extends JFrame{
 
                 records = viewModel.getRecordsByCategory("Notes", activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Note")));
+                records.forEach(record -> rows.add(record.asVector("Notes")));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }

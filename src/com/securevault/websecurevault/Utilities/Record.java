@@ -1,4 +1,4 @@
-package com.securevault.websecurevault.ObjectTypes;
+package com.securevault.websecurevault.Utilities;
 
 import java.util.Vector;
 
@@ -24,7 +24,7 @@ public class Record {
     public Vector<String> asVector(String strCategory) {
         Vector<String> v = new Vector<>();
         switch(strCategory) {
-            case "Credit Card":
+            case "Credit Cards":
                 v.add(title);
                 v.add(Integer.toString(card_number));
                 v.add(password);
@@ -33,7 +33,7 @@ public class Record {
                 v.add(note);
                 break;
 
-            case "Bank Account":
+            case "Bank Accounts":
                 v.add(title);
                 v.add(user_name);
                 v.add(password);
@@ -54,7 +54,7 @@ public class Record {
                 v.add(note);
                 break;
 
-            case "Note":
+            case "Notes":
                 v.add(title);
                 v.add(note);
                 break;

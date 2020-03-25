@@ -1,10 +1,8 @@
 package com.securevault.websecurevault.model;
 
-import com.securevault.websecurevault.ObjectTypes.Record;
-import com.securevault.websecurevault.ObjectTypes.User;
+import com.securevault.websecurevault.Utilities.Record;
+import com.securevault.websecurevault.Utilities.User;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Vector;
 
 /**ModelInterface is an interface which is implemented by model classes.
