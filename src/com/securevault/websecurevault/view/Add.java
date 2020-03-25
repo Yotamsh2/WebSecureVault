@@ -1,5 +1,6 @@
 package com.securevault.websecurevault.view;
 
+import com.securevault.websecurevault.Utilities.Category;
 import com.securevault.websecurevault.Utilities.Record;
 import com.securevault.websecurevault.Utilities.User;
 import com.securevault.websecurevault.model.ExceptionMVVM;
@@ -39,17 +40,18 @@ public class Add {
     private JLabel titleLabel;
     private JLabel noteLabel;
 
-    //to pass the main screen object to add/profile pages so it could be enabled back after exiting the page
+    //to pass the main screen and user objects to the add/profile pages so it could be enabled back after exiting the page
+    //or using the user details
     MainScreen mainToEnable = new MainScreen();
     User activeUser = new User();
 
     public Add() {
-        this.categoryComboBox.addItem("Credit Cards");
-        this.categoryComboBox.addItem("Bank Accounts");
-        this.categoryComboBox.addItem("Social Media");
-        this.categoryComboBox.addItem("Website and Email");
-        this.categoryComboBox.addItem("Online Shopping");
-        this.categoryComboBox.addItem("Notes");
+        this.categoryComboBox.addItem(Category.creditCards);
+        this.categoryComboBox.addItem(Category.bankAccounts);
+        this.categoryComboBox.addItem(Category.socialMedia);
+        this.categoryComboBox.addItem(Category.websitesAndEmails);
+        this.categoryComboBox.addItem(Category.onlineShopping);
+        this.categoryComboBox.addItem(Category.notes);
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -88,6 +90,7 @@ public class Add {
                 } catch (ExceptionMVVM exceptionMVVM) {
                     exceptionMVVM.printStackTrace();
                 }
+
                 addpageFrame.dispose();
                 mainToEnable.setFrameEnabled();//enabling the main screen
             }
@@ -97,7 +100,7 @@ public class Add {
         categoryComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if("Credit Cards".equals(categoryComboBox.getSelectedItem())) {
+                if(Category.creditCards.equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     cardnumberTextField.setVisible(true);
@@ -128,7 +131,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Bank Accounts".equals(categoryComboBox.getSelectedItem())) {
+                if(Category.bankAccounts.equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -159,7 +162,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Social Media".equals(categoryComboBox.getSelectedItem())) {
+                if(Category.socialMedia.equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -190,7 +193,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Website and Email".equals(categoryComboBox.getSelectedItem())) {
+                if(Category.websitesAndEmails.equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -221,7 +224,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Online Shopping".equals(categoryComboBox.getSelectedItem())) {
+                if(Category.onlineShopping.equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     usernameLabel.setVisible(true);
@@ -252,7 +255,7 @@ public class Add {
                     addpageFrame.repaint();
                 }
 
-                if("Notes".equals(categoryComboBox.getSelectedItem())) {
+                if(Category.notes.equals(categoryComboBox.getSelectedItem())) {
                     titleTextField.setVisible(true);
                     titleLabel.setVisible(true);
                     noteTextArea.setVisible(true);

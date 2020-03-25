@@ -66,34 +66,7 @@ public class DBConnection {
                         website,email,record_id,user_id);
                 recordsResult.add(r);
             }
-            //check printing all records in DB
-            rs = statement.executeQuery("SELECT * FROM records");
-            while (rs.next()) {
 
-                String title = rs.getString("title");
-                String cat = rs.getString("category");
-                String user_name  = rs.getString("user_name");
-                String password = rs.getString("password");
-                int account_number = rs.getInt("account_number");
-                int bank_number = rs.getInt("bank_number");
-                String bank_address= rs.getString("bank_address");
-                String note = rs.getString("note");
-                int card_number = rs.getInt("card_number");
-                int cvv = rs.getInt("cvv");
-                String expiring_date= rs.getString("expiring_date");
-                String website = rs.getString("website");
-                String email = rs.getString("email");
-                int record_id = rs.getInt("record_id");
-                String user_id = rs.getString("user_id");
-
-                Record r = new Record(title,cat,user_name,password,account_number,bank_number,bank_address,note,card_number,cvv,expiring_date,
-                        website,email,record_id,user_id);
-                System.out.println(r.toString());
-            }
-/*
-		//Deleting the table after the check
-		statement.execute("DROP TABLE records");
-*/
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");

@@ -1,5 +1,6 @@
 package com.securevault.websecurevault.view;
 
+import com.securevault.websecurevault.Utilities.Category;
 import com.securevault.websecurevault.Utilities.Record;
 import com.securevault.websecurevault.Utilities.User;
 import com.securevault.websecurevault.model.ExceptionMVVM;
@@ -17,35 +18,38 @@ import java.util.Vector;
 //TODO: meaningful variable names
 //TODO: make panels final with initalization
 public class MainScreen extends JFrame{
-    private final JPanel flowLeftPanel = new JPanel();
-    private  JLabel usernameLabel = new JLabel();
+    private JPanel flowLeftPanel = new JPanel();
+    private JLabel usernameLabel = new JLabel();
     private JLabel logoLabel;
-    private JLabel tableLabel = new JLabel("Credit Card");
-    private JTable formViewTable;
+    private JLabel tableLabel = new JLabel(Category.creditCards);
     private JPanel mainPanel;
-    private final JPanel flowRightPanel = new JPanel();
+    private JPanel flowRightPanel = new JPanel();
     private JPanel categoryButtonPanel;
     private JPanel tablePanel;
     private JPanel topBarPanel;
     private JButton profileButton;
     private JButton addButton;
     private JButton deleteButton = new JButton("Delete");
-    private JButton categoryButton1 = new JButton("Credit Card");
-    private JButton categoryButton2 = new JButton("Bank Account");
-    private JButton categoryButton3 = new JButton("Social Media");
-    private JButton categoryButton4 = new JButton("Website and Email");
-    private JButton categoryButton5 = new JButton("Online Shopping");
-    private JButton categoryButton6 = new JButton("Note");
+    private JButton categoryButton1 = new JButton(Category.creditCards);
+    private JButton categoryButton2 = new JButton(Category.bankAccounts);
+    private JButton categoryButton3 = new JButton(Category.socialMedia);
+    private JButton categoryButton4 = new JButton(Category.websitesAndEmails);
+    private JButton categoryButton5 = new JButton(Category.onlineShopping);
+    private JButton categoryButton6 = new JButton(Category.notes);
     private JFrame mainFrame = new JFrame();
 
     static MainScreen mainScreen = new MainScreen();
-    User activeUser = new User();
+    private User activeUser = new User(); //the user that logged in to the system
     private Vector<Record> records;
     private int selectedRecordIndex;
     private Vector<String> columnNamesToRefresh = new Vector<>();
 
+    private JTable formViewTable = new JTable();
+    DefaultTableModel tableModel = new DefaultTableModel();
+
+    ViewModel viewModel = new ViewModel();//MVVM connection variable
+
     public MainScreen() {
-        ViewModel viewModel = new ViewModel();//MVVM connection variable
 
         // Initializing components
         mainPanel = new JPanel();
@@ -54,42 +58,7 @@ public class MainScreen extends JFrame{
         topBarPanel = new JPanel();
         this.selectedRecordIndex = 0;
 
-        //data test
-        String[][] data = {
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-                { "Credit Card Laumi", "1234-5678", "1234", "123", "1.1.2020", "note..." },
-        };
-        String[] columnNames = { "Title", "Card Number","Password", "CVV","Expiring Date", "Note" };
-
-        //setting the layout and models of the components
+        //setting the layout and settings of the components
         mainPanel.setBorder(new EmptyBorder(5,5,5,5));
         mainPanel.setLayout(new BorderLayout());
         flowLeftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
@@ -97,10 +66,7 @@ public class MainScreen extends JFrame{
         categoryButtonPanel.setLayout(new GridLayout(3,2));
         tablePanel.setLayout(new BorderLayout());
         topBarPanel.setLayout(new GridLayout(1,2));
-        formViewTable = new JTable(data, columnNames);
         formViewTable.getTableHeader().setReorderingAllowed(false);
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-        formViewTable.setModel(tableModel);
         tableLabel.setHorizontalAlignment(0);
         Dimension d = new Dimension(90,25);
         profileButton.setMinimumSize(d);
@@ -176,7 +142,7 @@ public class MainScreen extends JFrame{
         categoryButton1.addActionListener(new ActionListener() {//Credit Card
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Credit Cards");
+                tableLabel.setText(Category.creditCards);
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("Card Number");
@@ -186,9 +152,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Note");
                 columnNamesToRefresh = columnNames;
 
-                records = viewModel.getRecordsByCategory("Credit Cards", activeUser);
+                records = viewModel.getRecordsByCategory(Category.creditCards, activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Credit Cards")));
+                records.forEach(record -> rows.add(record.asVector(Category.creditCards)));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -196,7 +162,7 @@ public class MainScreen extends JFrame{
         categoryButton2.addActionListener(new ActionListener() {//Bank Account
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Bank Accounts");
+                tableLabel.setText(Category.bankAccounts);
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("User Name");
@@ -206,9 +172,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Bank Address");
                 columnNames.add("Note");
 
-                records = viewModel.getRecordsByCategory("Bank Accounts", activeUser);
+                records = viewModel.getRecordsByCategory(Category.bankAccounts, activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Bank Accounts")));
+                records.forEach(record -> rows.add(record.asVector(Category.bankAccounts)));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -216,7 +182,7 @@ public class MainScreen extends JFrame{
         categoryButton3.addActionListener(new ActionListener() {//Social Media
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Social Media");
+                tableLabel.setText(Category.socialMedia);
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("User Name");
@@ -225,9 +191,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                records = viewModel.getRecordsByCategory("Social Media", activeUser);
+                records = viewModel.getRecordsByCategory(Category.socialMedia, activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Social Media")));
+                records.forEach(record -> rows.add(record.asVector(Category.socialMedia)));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -235,7 +201,7 @@ public class MainScreen extends JFrame{
         categoryButton4.addActionListener(new ActionListener() {//Website and Email
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Websites and Emails");
+                tableLabel.setText(Category.websitesAndEmails);
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("User Name");
@@ -244,9 +210,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                records = viewModel.getRecordsByCategory("Website and Email", activeUser);
+                records = viewModel.getRecordsByCategory(Category.websitesAndEmails, activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Website and Email")));
+                records.forEach(record -> rows.add(record.asVector(Category.websitesAndEmails)));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -254,7 +220,7 @@ public class MainScreen extends JFrame{
         categoryButton5.addActionListener(new ActionListener() {//Online Shopping
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Online Shopping");
+                tableLabel.setText(Category.onlineShopping);
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("User Name");
@@ -263,9 +229,9 @@ public class MainScreen extends JFrame{
                 columnNames.add("Email");
                 columnNames.add("Note");
 
-                records = viewModel.getRecordsByCategory("Online Shopping", activeUser);
+                records = viewModel.getRecordsByCategory(Category.onlineShopping, activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Online Shopping")));
+                records.forEach(record -> rows.add(record.asVector(Category.onlineShopping)));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -273,15 +239,15 @@ public class MainScreen extends JFrame{
         categoryButton6.addActionListener(new ActionListener() {//Note
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableLabel.setText("Notes");
+                tableLabel.setText(Category.notes);
                 Vector<String> columnNames = new Vector<>();
                 columnNames.add("Title");
                 columnNames.add("Note");
                 columnNamesToRefresh = columnNames;
 
-                records = viewModel.getRecordsByCategory("Notes", activeUser);
+                records = viewModel.getRecordsByCategory(Category.notes, activeUser);
                 Vector<Vector<String>> rows = new Vector<>();
-                records.forEach(record -> rows.add(record.asVector("Notes")));
+                records.forEach(record -> rows.add(record.asVector(Category.notes)));
                 tableModel.setDataVector(rows, columnNames);
                 formViewTable.setModel(tableModel);
             }
@@ -295,16 +261,31 @@ public class MainScreen extends JFrame{
     }
 
     /**
-     * The main go function that will be called after user has logged in or singed up to the system.
+     * The main go function will be called after user has logged in or singed up to the system.
      * this function is running the main screen and making it visible.
      */
     public void go(User user, MainScreen mainscreen)
     {
-        mainScreen=mainscreen;
+        mainScreen = mainscreen;
         activeUser = user;
         mainFrame.setSize(1000,500);
         mainFrame.setContentPane(mainPanel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
+
+        //Initializing table for first run
+        tableLabel.setText(Category.creditCards);
+        Vector<String> columnNames = new Vector<>();
+        columnNames.add("Title");
+        columnNames.add("Card Number");
+        columnNames.add("Password");
+        columnNames.add("CVV");
+        columnNames.add("Expiring Date");
+        columnNames.add("Note");
+        records = viewModel.getRecordsByCategory(Category.creditCards, activeUser);
+        Vector<Vector<String>> rows = new Vector<>();
+        records.forEach(record -> rows.add(record.asVector(Category.creditCards)));
+        tableModel.setDataVector(rows, columnNames);
+        formViewTable.setModel(tableModel);
     }
 }

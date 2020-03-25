@@ -75,6 +75,7 @@ public class Profile {
     public void go(MainScreen mainScreen, User user)
     {
         activeUser = user;
+        //check print
         System.out.println("email: "+activeUser.getUser_id()+"first name: "+activeUser.getFirst_name()+"last name: "+activeUser.getLast_name()+"pass: "+activeUser.getMaster_pass());
         mainToEnable = mainScreen;
         profilepageFrame = new JFrame();

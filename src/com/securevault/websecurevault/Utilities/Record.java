@@ -24,7 +24,7 @@ public class Record {
     public Vector<String> asVector(String strCategory) {
         Vector<String> v = new Vector<>();
         switch(strCategory) {
-            case "Credit Cards":
+            case Category.creditCards:
                 v.add(title);
                 v.add(Integer.toString(card_number));
                 v.add(password);
@@ -33,7 +33,7 @@ public class Record {
                 v.add(note);
                 break;
 
-            case "Bank Accounts":
+            case Category.bankAccounts:
                 v.add(title);
                 v.add(user_name);
                 v.add(password);
@@ -43,9 +43,9 @@ public class Record {
                 v.add(note);
                 break;
 
-            case "Social Media":
-            case "Website and Email":
-            case "Online Shopping":
+            case Category.socialMedia:
+            case Category.websitesAndEmails:
+            case Category.onlineShopping:
                 v.add(title);
                 v.add(user_name);
                 v.add(password);
@@ -54,7 +54,7 @@ public class Record {
                 v.add(note);
                 break;
 
-            case "Notes":
+            case Category.notes:
                 v.add(title);
                 v.add(note);
                 break;
@@ -62,7 +62,10 @@ public class Record {
         return v;
     }
 
-    public Record(String title, String category, String user_name, String password, int account_number, int bank_number, String bank_address, String note, int card_number, int cvv, String expiring_date, String website, String email, int record_id, String user_id) {
+    public Record(String title, String category, String user_name, String password, int account_number, int bank_number,
+                  String bank_address, String note, int card_number, int cvv, String expiring_date, String website, String email,
+                  int record_id, String user_id)
+    {
         this.title = title;
         this.category = category;
         this.user_name = user_name;
@@ -239,5 +242,4 @@ public class Record {
                 ", user_id='" + user_id + '\'' +
                 '}';
     }
-
 }

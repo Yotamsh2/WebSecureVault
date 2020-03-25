@@ -7,46 +7,8 @@ import com.securevault.websecurevault.view.LogIn;
 public class Start {
 
     public static void main(String[] args) {
-        //MainScreen mainScreen = new MainScreen();
-        //mainScreen.go(mainScreen); //Create And Show Main Screen
         LogIn logIn = new LogIn();
         logIn.go();
-
-        //ModelDerbyDB mdDB = new ModelDerbyDB();
-        //added a new Credit Card record to db
-        /*Record record1 = new Record("Credit Card Hapoalim","Credit Card","user_name","1234",
-                1234,1234,"","note...",12345678,123 , "1.1.2020",
-                "" , "",100216,"yuval@gmail.com");
-        try {
-            mdDB.addRecord(record1);
-        } catch (ExceptionMVVM exceptionMVVM) {
-            exceptionMVVM.printStackTrace();
-        }*/
-
-        /*Vector<Record> records = mdDB.getRecords("Social Media");
-        if (records == null)
-            Logger.getGlobal().log(Level.SEVERE,"rs is NULL");
-        else {
-            records.forEach(record -> System.out.println(""+ record.toString()));
-        }*/
-
-        //System.out.println("rs: "+ rs.toString());
-
-/*
-        try {
-            while (rs.next()) {
-                System.out.println("Record ID = " + rs.getInt("record_id") + ", Category = " + rs.getString("category") +
-                        "User ID = " + rs.getString("user_id") + ", Title = " + rs.getString("title") +
-                        "Website = " + rs.getString("website") + ", Email = " + rs.getString("email"));
-            rs.close();
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-*/
-
-//        View_MainScreen mainScreen = new View_MainScreen(); //TODO create view class of the main screen
 
         //TODO Examples - delete if don't need
         /*
