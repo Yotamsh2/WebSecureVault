@@ -153,19 +153,24 @@ public class MainScreen extends JFrame{
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    selectedRecordIndex = records.get(formViewTable.getSelectedRow()).getRecord_id();
-                    viewModel.deleteRecord(selectedRecordIndex);
-                } catch (ExceptionMVVM exceptionMVVM) {
-                    exceptionMVVM.printStackTrace();
+                if (formViewTable.getSelectedRow() != -1) {
+                    try {
+                        selectedRecordIndex = records.get(formViewTable.getSelectedRow()).getRecord_id();
+                        viewModel.deleteRecord(selectedRecordIndex);
+                    } catch (ExceptionMVVM exceptionMVVM) {
+                        exceptionMVVM.printStackTrace();
+                    }
+                    //refreshing the table
+                    records.remove(formViewTable.getSelectedRow());
+                    records.forEach(record -> System.out.println(record.toString()));
+                    Vector<Vector<String>> rowsToRefresh = new Vector<>();
+                    records.forEach(record -> rowsToRefresh.add(record.asVector(record.getCategory())));
+                    tableModel.setDataVector(rowsToRefresh, columnNamesToRefresh);
+                    formViewTable.setModel(tableModel);
+                } else {
+                    JOptionPane.showMessageDialog(null,"Please select a record to delete.",
+                            "ERROR",JOptionPane.ERROR_MESSAGE,null);
                 }
-                // TODO: 23/03/2020 check why the refresh function doesn't work
-                records.remove(formViewTable.getSelectedRow());
-                records.forEach(record -> System.out.println(record.toString()));
-                Vector<Vector<String>> rowsToRefresh = new Vector<>();
-                records.forEach(record -> rowsToRefresh.add(record.asVector(record.getCategory())));
-                tableModel.setDataVector(rowsToRefresh, columnNamesToRefresh);
-                formViewTable.setModel(tableModel);
             }
         });
         categoryButton1.addActionListener(new ActionListener() {//Credit Card

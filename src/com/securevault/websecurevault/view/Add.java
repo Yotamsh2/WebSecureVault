@@ -92,6 +92,7 @@ public class Add {
                 mainToEnable.setFrameEnabled();//enabling the main screen
             }
         });
+
         //changing the displayed components based on combobox option
         categoryComboBox.addItemListener(new ItemListener() {
             @Override
@@ -283,6 +284,7 @@ public class Add {
                 }
             }
         });
+
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
