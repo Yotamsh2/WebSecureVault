@@ -259,10 +259,8 @@ public class MainScreen extends JFrame{
         mainFrame.setVisible(true);
     }
 
-    /**
-     * The main go function will be called after user has logged in or singed up to the system.
-     * this function is running the main screen and making it visible.
-     */
+    /**The main go function will be called after user has logged in or singed up to the system.
+     * this function is running the main screen and making it visible.*/
     public void go(User user, MainScreen mainscreen) {
         mainScreen = mainscreen;
         activeUser = user;

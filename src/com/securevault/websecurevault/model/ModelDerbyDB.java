@@ -27,6 +27,7 @@ public class ModelDerbyDB implements ModelInterface {
         try {
         //Getting result set by executing query
         rs = statement.executeQuery("SELECT * FROM records WHERE " + ColumnNames.userId + " LIKE '" + user.getUser_id() + "' AND " + ColumnNames.category + " LIKE '" + category + "'");
+            Logger.getGlobal().log(Level.FINE,"getRecords query executed successfully");
 
         //Scan the resultSet data and print it
         while (rs.next()) {
@@ -54,12 +55,13 @@ public class ModelDerbyDB implements ModelInterface {
 
     } catch (Exception e) {
         e.printStackTrace();
-        Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");
+        Logger.getGlobal().log(Level.SEVERE,"DB connection exception in getRecords method, couldn't execute query.");
     } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
             } catch (SQLException e) {
                 e.printStackTrace();
+                Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
         return recordsResult;
@@ -80,15 +82,16 @@ public class ModelDerbyDB implements ModelInterface {
                     " '" + record.getPassword() + "', '" + record.getTitle() + "', '" + record.getNote() + "', " + record.getCard_number() + "," +
                     " '" + record.getExpiring_date() + "', " + record.getCvv() + ", " + record.getAccount_number() + ", '" + record.getBank_address() + "'," +
                     " " + record.getBank_number() + ", '" + record.getCategory() + "')");
-
+            Logger.getGlobal().log(Level.FINE,"addRecord query executed successfully");
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in addRecord method, couldn't execute query.");
         } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
             } catch (SQLException e) {
                 e.printStackTrace();
+                Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
     }
@@ -102,15 +105,16 @@ public class ModelDerbyDB implements ModelInterface {
         try {
             //Query to execute
             statement.executeUpdate("delete from records where "+ ColumnNames.recordId +" = "+recordId+"");
-            Logger.getGlobal().log(Level.SEVERE,"Record deleted from DB.");
+            Logger.getGlobal().log(Level.FINE,"deleteRecord query executed successfully");
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in deleteRecord method, couldn't execute query.");
         } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
             } catch (SQLException e) {
                 e.printStackTrace();
+                Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
     }
@@ -128,20 +132,22 @@ public class ModelDerbyDB implements ModelInterface {
             ResultSet tables = dbm.getTables(null, null, "USERS", null);
             if (!tables.next()) {
                 initialize(statement);
+                Logger.getGlobal().log(Level.FINE,"initialize query executed successfully, DB has been created");
             }
 
             //Inserting new users to the table
             statement.executeUpdate("insert into users values ('" + user.getUser_id() + "', '" + user.getFirst_name() + "'," +
                     " '" + user.getLast_name() + "', '" + user.getMaster_pass() + "')");
-
+            Logger.getGlobal().log(Level.FINE,"insertUser query executed successfully");
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in insertUser method, couldn't execute query.");
         } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
             } catch (SQLException e) {
                 e.printStackTrace();
+                Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
     }
@@ -157,15 +163,17 @@ public class ModelDerbyDB implements ModelInterface {
             statement.executeUpdate("update users set "+ColumnNames.userId+" = '" + user.getUser_id() + "', "+ColumnNames.firstName+" = '" + user.getFirst_name() + "'," +
                     " " +ColumnNames.lastName + " = '" + user.getLast_name() + "', "+ColumnNames.masterPass+" = '" + user.getMaster_pass() + "' " +
                     "where "+ColumnNames.userId+" like '" + user.getUser_id() + "' ");
+            Logger.getGlobal().log(Level.FINE,"updateUserCredentials query executed successfully");
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception. Couldn't execute query");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in updateUserCredentials method, couldn't execute query.");
             return false;
         } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
             } catch (SQLException e) {
                 e.printStackTrace();
+                Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
         return true;
@@ -190,6 +198,7 @@ public class ModelDerbyDB implements ModelInterface {
                 userToReturn.setLast_name(rs.getString("last_name"));
                 userToReturn.setMaster_pass(rs.getString("master_pass"));
                 Logger.getGlobal().log(Level.FINE, "User correctly authenticated in the DB!.");
+
                 //printing the user for debugging
                 System.out.println("UserID=" + rs.getString("user_id") + " , FirstName=" + rs.getString("first_name") +
                         " , LastName=" + rs.getString("last_name") + " , Password=" + rs.getString("master_pass"));
@@ -201,12 +210,13 @@ public class ModelDerbyDB implements ModelInterface {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in checkCredentials method, couldn't execute query.");
         } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
             } catch (SQLException e) {
                 e.printStackTrace();
+                Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
         return userToReturn;
@@ -230,13 +240,13 @@ public class ModelDerbyDB implements ModelInterface {
                     ColumnNames.lastName + " varchar(255)," + ColumnNames.masterPass + " varchar(255)" + " )");
             Logger.getGlobal().log(Level.FINE, "Table users created.");
 
-            //Inserting new users to the table
+            //Inserting master users to the table
             statement.executeUpdate("insert into users values ('master','Yuval','Nir','1234')");
             Logger.getGlobal().log(Level.FINE, "Data created in records and in users.");
 
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in initialize method, couldn't execute query.");
         }
     }
 

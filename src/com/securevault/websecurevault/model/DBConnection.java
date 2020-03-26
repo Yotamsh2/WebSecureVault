@@ -32,7 +32,7 @@ public class DBConnection {
             Logger.getGlobal().log(Level.FINE, "Statement created.");
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getGlobal().log(Level.SEVERE,"DB connection exception.");
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in getConnection method.");
         }
         return statement;
     }
@@ -40,16 +40,22 @@ public class DBConnection {
     public void closeConnection (Connection connection, Statement statement, ResultSet rs){
 
         if (rs != null) try {
-            //rs.close();
+            rs.close();
+            Logger.getGlobal().log(Level.FINE,"rs.close() executed successfully");
         } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection - rs.close method.");
         }
         if (statement != null) try {
             statement.close();
+            Logger.getGlobal().log(Level.FINE,"statement.close() executed successfully");
         } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection - statement.close method.");
         }
         if (connection != null) try {
             connection.close();
+            Logger.getGlobal().log(Level.FINE,"connection.close() executed successfully");
         } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection - connection.close method.");
         }
     }
 }
