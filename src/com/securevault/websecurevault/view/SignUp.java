@@ -5,6 +5,8 @@ import com.securevault.websecurevault.viewmodel.ViewModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class SignUp {
     private JPanel signupPagePanel;
@@ -22,6 +24,7 @@ public class SignUp {
     private JLabel firstnameLabel;
     private JLabel lastnameLabel;
     private JLabel signuppageLabel;
+    private JButton cancelButton;
 
 
     public SignUp() {
@@ -41,12 +44,27 @@ public class SignUp {
                 }
             }
         });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LogIn logIn = new LogIn();
+                logIn.go();
+                signupPageFrame.dispose();
+            }
+        });
     }
 
     public void go(){
         signupPageFrame.setSize(300,250);
         signupPageFrame.setContentPane(signupPagePanel);
         signupPageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        signupPageFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                LogIn logIn = new LogIn();
+                logIn.go();
+                signupPageFrame.dispose();
+            }
+        });
         signupPageFrame.setVisible(true);
     }
 }

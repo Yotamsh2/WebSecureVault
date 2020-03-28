@@ -46,7 +46,13 @@ public class MainScreen extends JFrame{
     private Vector<String> columnNamesToRefresh = new Vector<>();
 
     private JTable formViewTable = new JTable();
-    DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultTableModel tableModel = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            //all cells false
+            return false;
+        }
+    };
 
     public MainScreen() {
 
@@ -66,6 +72,7 @@ public class MainScreen extends JFrame{
         tablePanel.setLayout(new BorderLayout());
         topBarPanel.setLayout(new GridLayout(1,2));
         formViewTable.getTableHeader().setReorderingAllowed(false);
+
         tableLabel.setHorizontalAlignment(0);
         Dimension d = new Dimension(90,25);
         profileButton.setMinimumSize(d);

@@ -229,7 +229,7 @@
         <properties>
           <caretColor color="-4473925"/>
           <foreground color="-16777216"/>
-          <lineWrap value="false"/>
+          <lineWrap value="true"/>
           <margin top="1" left="1" bottom="1" right="1"/>
           <text value=""/>
           <wrapStyleWord value="true"/>
