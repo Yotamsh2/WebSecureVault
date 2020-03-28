@@ -1,8 +1,8 @@
 package com.securevault.websecurevault.view;
 
-import com.securevault.websecurevault.Utilities.Category;
-import com.securevault.websecurevault.Utilities.Record;
-import com.securevault.websecurevault.Utilities.User;
+import com.securevault.websecurevault.utilities.Category;
+import com.securevault.websecurevault.utilities.Record;
+import com.securevault.websecurevault.utilities.User;
 import com.securevault.websecurevault.model.ExceptionMVVM;
 import com.securevault.websecurevault.viewmodel.ViewModel;
 

@@ -1,8 +1,8 @@
 package com.securevault.websecurevault.model;
 
-import com.securevault.websecurevault.Utilities.ColumnNames;
-import com.securevault.websecurevault.Utilities.Record;
-import com.securevault.websecurevault.Utilities.User;
+import com.securevault.websecurevault.utilities.ColumnNames;
+import com.securevault.websecurevault.utilities.Record;
+import com.securevault.websecurevault.utilities.User;
 
 import java.sql.*;
 import java.util.Vector;

@@ -1,6 +1,6 @@
-package com.securevault.websecurevault.Tests;
+package com.securevault.websecurevault.tests;
 
-import com.securevault.websecurevault.Utilities.User;
+import com.securevault.websecurevault.utilities.User;
 import com.securevault.websecurevault.model.ModelDerbyDB;
 import org.junit.*;
 import static org.junit.Assert.*;

@@ -1,4 +1,4 @@
-package com.securevault.websecurevault.Utilities;
+package com.securevault.websecurevault.utilities;
 
 /**Category class is used to name the category easily and evenly across the whole system.*/
 public class Category {

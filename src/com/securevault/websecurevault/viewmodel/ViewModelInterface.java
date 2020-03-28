@@ -1,7 +1,7 @@
 package com.securevault.websecurevault.viewmodel;
 
-import com.securevault.websecurevault.Utilities.Record;
-import com.securevault.websecurevault.Utilities.User;
+import com.securevault.websecurevault.utilities.Record;
+import com.securevault.websecurevault.utilities.User;
 import com.securevault.websecurevault.model.ExceptionMVVM;
 
 import java.util.Vector;

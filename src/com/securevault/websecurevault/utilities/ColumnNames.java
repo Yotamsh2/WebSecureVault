@@ -1,4 +1,4 @@
-package com.securevault.websecurevault.Utilities;
+package com.securevault.websecurevault.utilities;
 
 public class ColumnNames {
     //Names of the record columns
