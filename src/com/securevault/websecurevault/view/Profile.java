@@ -64,6 +64,8 @@ public class Profile {
                     activeUser = userToUpdate;
                     JOptionPane.showMessageDialog(null,"Updated user information successfully.",
                             "Success",JOptionPane.PLAIN_MESSAGE,null);
+                    profilepageFrame.dispose();
+                    mainToEnable.setFrameEnabled();
                 }
                 else JOptionPane.showMessageDialog(null,"Update fail.",
                         "ERROR",JOptionPane.ERROR_MESSAGE,null);
