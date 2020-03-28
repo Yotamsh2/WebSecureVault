@@ -55,7 +55,7 @@ public class SignUp {
     }
 
     public void go(){
-        signupPageFrame.setSize(300,250);
+        signupPageFrame.setSize(340,300);
         signupPageFrame.setContentPane(signupPagePanel);
         signupPageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         signupPageFrame.addWindowListener(new WindowAdapter() {

@@ -301,7 +301,7 @@ public class Add {
     {
         this.mainToEnable = mainScreen;
         this.activeUser = user;
-        addpageFrame.setSize(400,450);
+        addpageFrame.setSize(450,450);
         addpageFrame.setContentPane(addpagePanel);
         addpageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addpageFrame.addWindowListener(new WindowAdapter() {//enabling the main screen when closing add page

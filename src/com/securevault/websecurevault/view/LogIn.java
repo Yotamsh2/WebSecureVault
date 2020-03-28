@@ -16,8 +16,7 @@ public class LogIn {
     private JTextField passwordTextField;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
-    private JLabel securevaultLabel;
-    private JLabel loginpageLabel;
+    private JLabel secureVaultLogo;
 
     public LogIn() {
         logInButton.addActionListener(new ActionListener() {
@@ -52,9 +51,10 @@ public class LogIn {
 
     public void go(){
         loginPageFrame = new JFrame();
-        loginPageFrame.setSize(300,250);
+        loginPageFrame.setSize(420,250);
         loginPageFrame.setContentPane(loginPagePanel);
         loginPageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         loginPageFrame.setVisible(true);
     }
+
 }

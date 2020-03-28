@@ -37,6 +37,7 @@ public class MainScreen extends JFrame{
     private JButton categoryButton4 = new JButton(Category.websitesAndEmails);
     private JButton categoryButton5 = new JButton(Category.onlineShopping);
     private JButton categoryButton6 = new JButton(Category.notes);
+    private Color back = new Color(6,112,170);
 
     static MainScreen mainScreen = new MainScreen();
     private ViewModel viewModel = new ViewModel();//MVVM connection variable
@@ -66,14 +67,21 @@ public class MainScreen extends JFrame{
         //setting the layout and settings of the components
         mainPanel.setBorder(new EmptyBorder(5,5,5,5));
         mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBackground(back);
         flowLeftPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
+        flowLeftPanel.setBackground(back);
         flowRightPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
+        flowRightPanel.setBackground(back);
         categoryButtonPanel.setLayout(new GridLayout(3,2));
+        categoryButtonPanel.setBackground(back);
         tablePanel.setLayout(new BorderLayout());
+        tablePanel.setBackground(back);
         topBarPanel.setLayout(new GridLayout(1,2));
+        topBarPanel.setBackground(back);
         formViewTable.getTableHeader().setReorderingAllowed(false);
 
         tableLabel.setHorizontalAlignment(0);
+        tableLabel.setForeground(Color.WHITE);
         Dimension d = new Dimension(90,25);
         profileButton.setMinimumSize(d);
         profileButton.setPreferredSize(d);
@@ -290,5 +298,10 @@ public class MainScreen extends JFrame{
         records.forEach(record -> rows.add(record.asVector(Category.creditCards)));
         tableModel.setDataVector(rows, columnNames);
         formViewTable.setModel(tableModel);
+        //formViewTable.setBackground(back);
+
+        usernameLabel.setText(activeUser.getFirst_name()+" "+activeUser.getLast_name());
+        usernameLabel.setForeground(Color.WHITE);
+        usernameLabel.setFont(new Font ("Outlier Rail", Font.PLAIN, 18));
     }
 }

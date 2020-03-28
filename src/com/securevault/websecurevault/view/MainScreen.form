@@ -3,10 +3,12 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="508" height="400"/>
+      <xy x="20" y="20" width="568" height="400"/>
     </constraints>
     <properties>
+      <background color="-15699798"/>
       <enabled value="true"/>
+      <foreground color="-1"/>
     </properties>
     <border type="empty">
       <size top="10" left="10" bottom="10" right="10"/>
@@ -25,22 +27,29 @@
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Outlier Rail"/>
+          <foreground color="-1"/>
           <text value="User Name"/>
         </properties>
       </component>
       <component id="df631" class="javax.swing.JLabel" binding="logoLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Secure Vault"/>
+          <font name="Outlier Rail" size="22"/>
+          <foreground color="-12124168"/>
+          <icon value="com/securevault/websecurevault/Images/logo_very_small.png"/>
+          <text value="SECURE VAULT"/>
         </properties>
       </component>
       <scrollpane id="e3e88">
         <constraints>
           <grid row="1" column="0" row-span="3" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-15691570"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="fce11" class="javax.swing.JTable" binding="formViewTable">
