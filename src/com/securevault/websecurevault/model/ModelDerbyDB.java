@@ -24,6 +24,7 @@ public class ModelDerbyDB implements ModelInterface {
         ResultSet rs = null;
         Vector<Record> recordsResult = new Vector<>();
 
+
         try {
         //Getting result set by executing query
         rs = statement.executeQuery("SELECT * FROM records WHERE " + ColumnNames.userId + " LIKE '" + user.getUser_id() + "' AND " + ColumnNames.category + " LIKE '" + category + "'");
@@ -69,13 +70,13 @@ public class ModelDerbyDB implements ModelInterface {
 
     /**addRecord is adding the item we wish to add to the database.*/
     @Override
-    public void addRecord(Record record) throws ExceptionMVVM {
+    public boolean addRecord(Record record) throws ExceptionMVVM {
         Statement statement = dbConnection.getConnection();
         ResultSet rs = null;
-
+        int num = 0;
         try {
             //Query to execute
-            statement.executeUpdate("insert into records (" + ColumnNames.userId + ", " + ColumnNames.userName + "," + ColumnNames.email + ", " + ColumnNames.website + "," +
+            num = statement.executeUpdate("insert into records (" + ColumnNames.userId + ", " + ColumnNames.userName + "," + ColumnNames.email + ", " + ColumnNames.website + "," +
                     " " + ColumnNames.password + ", " + ColumnNames.title + ", " + ColumnNames.note + ", " + ColumnNames.cardNumber + ", " + ColumnNames.cardExpiringDate + "," +
                     " " + ColumnNames.cvv + ", " + ColumnNames.accountNumber + ", " + ColumnNames.bankAddress + ", " + ColumnNames.bankNumber + ", " + ColumnNames.category + ") " +
                     "values ('" + record.getUser_id() + "', '" + record.getUser_name() + "', '" + record.getEmail() + "', '" + record.getWebsite() + "'," +
@@ -94,17 +95,21 @@ public class ModelDerbyDB implements ModelInterface {
                 Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
+        if (num==1)
+            return true;
+        else
+            return false;
     }
 
     /**deleteItem is deleting the item we wish to delete from the database by using it's record id.*/
     @Override
-    public void deleteRecord(int recordId) throws ExceptionMVVM {
+    public boolean deleteRecord(int recordId) throws ExceptionMVVM {
         Statement statement = dbConnection.getConnection();
         ResultSet rs = null;
-
+        int num = 0;
         try {
             //Query to execute
-            statement.executeUpdate("delete from records where "+ ColumnNames.recordId +" = "+recordId+"");
+            num = statement.executeUpdate("delete from records where "+ ColumnNames.recordId +" = "+recordId+"");
             Logger.getGlobal().log(Level.FINE,"deleteRecord query executed successfully");
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,13 +122,18 @@ public class ModelDerbyDB implements ModelInterface {
                 Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
+        if (num==1)
+            return true;
+        else
+            return false;
     }
 
     /**insertUser method is inserting a new user to the DB, a user who has signed up.*/
     @Override
-    public void insertUser(User user) {
+    public boolean insertUser(User user) {
         Statement statement = dbConnection.getConnection();
         ResultSet rs = null;
+        int num = 0;
 
         try {
             DatabaseMetaData dbm = statement.getConnection().getMetaData();
@@ -136,7 +146,7 @@ public class ModelDerbyDB implements ModelInterface {
             }
 
             //Inserting new users to the table
-            statement.executeUpdate("insert into users values ('" + user.getUser_id() + "', '" + user.getFirst_name() + "'," +
+            num = statement.executeUpdate("insert into users values ('" + user.getUser_id() + "', '" + user.getFirst_name() + "'," +
                     " '" + user.getLast_name() + "', '" + user.getMaster_pass() + "')");
             Logger.getGlobal().log(Level.FINE,"insertUser query executed successfully");
         } catch (Exception e) {
@@ -150,6 +160,10 @@ public class ModelDerbyDB implements ModelInterface {
                 Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
+        if (num==1)
+            return true;
+        else
+            return false;
     }
 
     /**updateUserCredentials method is updating the user information  used in the profile page.*/
@@ -157,17 +171,18 @@ public class ModelDerbyDB implements ModelInterface {
     public boolean updateUserCredentials(User user) {
         Statement statement = dbConnection.getConnection();
         ResultSet rs = null;
-
+        int num = 0;
         try {
             //updating user in table
-            statement.executeUpdate("update users set "+ColumnNames.userId+" = '" + user.getUser_id() + "', "+ColumnNames.firstName+" = '" + user.getFirst_name() + "'," +
+            num = statement.executeUpdate("update users set "+ColumnNames.userId+" = '" + user.getUser_id() + "', "+ColumnNames.firstName+" = '" + user.getFirst_name() + "'," +
                     " " +ColumnNames.lastName + " = '" + user.getLast_name() + "', "+ColumnNames.masterPass+" = '" + user.getMaster_pass() + "' " +
                     "where "+ColumnNames.userId+" like '" + user.getUser_id() + "' ");
             Logger.getGlobal().log(Level.FINE,"updateUserCredentials query executed successfully");
+
+
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getGlobal().log(Level.SEVERE,"DB connection exception in updateUserCredentials method, couldn't execute query.");
-            return false;
         } finally {
             try {
                 dbConnection.closeConnection(statement.getConnection(),statement,rs);
@@ -176,7 +191,10 @@ public class ModelDerbyDB implements ModelInterface {
                 Logger.getGlobal().log(Level.SEVERE,"DB connection exception in closeConnection method.");
             }
         }
-        return true;
+        if (num == 1)
+            return true;
+        else
+            return false;
     }
 
     /**checkCredentials method is for checking users login credentials,
@@ -188,6 +206,14 @@ public class ModelDerbyDB implements ModelInterface {
         User userToReturn = new User();
 
         try {
+            // Check if "users" table is in the database, and if not creates the table
+            DatabaseMetaData dbm = statement.getConnection().getMetaData();
+            ResultSet tables = dbm.getTables(null, null, "USERS", null);
+            if (!tables.next()) {
+                initialize(statement);
+                Logger.getGlobal().log(Level.FINE,"initialize query executed successfully, DB has been created");
+            }
+
             //checks for a match of user_id and password in the DB
             rs = statement.executeQuery(
                     "SELECT * FROM users WHERE "+ColumnNames.userId+" LIKE '" + user.getUser_id() + "' AND "+ColumnNames.masterPass+" LIKE '" + user.getMaster_pass() + "' ");
@@ -240,9 +266,25 @@ public class ModelDerbyDB implements ModelInterface {
                     ColumnNames.lastName + " varchar(255)," + ColumnNames.masterPass + " varchar(255)" + " )");
             Logger.getGlobal().log(Level.FINE, "Table users created.");
 
-            //Inserting master users to the table
-            statement.executeUpdate("insert into users values ('master','Yuval','Nir','1234')");
+            //Inserting master user to the table
+            statement.executeUpdate("insert into users values ('master','Master','Splinter','1234')");
             Logger.getGlobal().log(Level.FINE, "Data created in records and in users.");
+
+            //Inserting master user data to the table
+            statement.executeUpdate("insert into records (" + ColumnNames.userId + ", " + ColumnNames.userName + "," + ColumnNames.email + ", " + ColumnNames.website + "," +
+                    " " + ColumnNames.password + ", " + ColumnNames.title + ", " + ColumnNames.note + ", " + ColumnNames.cardNumber + ", " + ColumnNames.cardExpiringDate + "," +
+                    " " + ColumnNames.cvv + ", " + ColumnNames.accountNumber + ", " + ColumnNames.bankAddress + ", " + ColumnNames.bankNumber + ", " + ColumnNames.category + ") " +
+                    "values ('master', '', '', '', '1234', 'Leumi Card', 'Some note...', 12345678, '1.1.2021', 123, null, '', null, 'Credit Cards')");
+
+            statement.executeUpdate("insert into records (" + ColumnNames.userId + ", " + ColumnNames.userName + "," + ColumnNames.email + ", " + ColumnNames.website + "," +
+                    " " + ColumnNames.password + ", " + ColumnNames.title + ", " + ColumnNames.note + ", " + ColumnNames.cardNumber + ", " + ColumnNames.cardExpiringDate + "," +
+                    " " + ColumnNames.cvv + ", " + ColumnNames.accountNumber + ", " + ColumnNames.bankAddress + ", " + ColumnNames.bankNumber + ", " + ColumnNames.category + ") " +
+                    "values ('master', '', '', '', '1234', 'Hapoalim Card', 'Some note...', 12345678, '1.1.2021', 123, null, '', null, 'Credit Cards')");
+
+            statement.executeUpdate("insert into records (" + ColumnNames.userId + ", " + ColumnNames.userName + "," + ColumnNames.email + ", " + ColumnNames.website + "," +
+                    " " + ColumnNames.password + ", " + ColumnNames.title + ", " + ColumnNames.note + ", " + ColumnNames.cardNumber + ", " + ColumnNames.cardExpiringDate + "," +
+                    " " + ColumnNames.cvv + ", " + ColumnNames.accountNumber + ", " + ColumnNames.bankAddress + ", " + ColumnNames.bankNumber + ", " + ColumnNames.category + ") " +
+                    "values ('master', '', '', '', '1234', 'Mizrahi Card', 'Some note...', 12345678, '1.1.2021', 123, null, '', null, 'Credit Cards')");
 
         } catch (Exception e) {
             e.printStackTrace();

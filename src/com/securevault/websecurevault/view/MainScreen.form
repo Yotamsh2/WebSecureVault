@@ -37,9 +37,10 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="Outlier Rail" size="22"/>
+          <font size="22"/>
           <foreground color="-12124168"/>
           <icon value="com/securevault/websecurevault/Images/logo_very_small.png"/>
+          <inheritsPopupMenu value="true"/>
           <text value="SECURE VAULT"/>
         </properties>
       </component>

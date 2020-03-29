@@ -12,9 +12,9 @@ import java.util.Vector;
 
 public interface ModelInterface {
     Vector<Record> getRecords(String category, User user) throws ExceptionMVVM, SQLException;
-    void addRecord(Record record) throws ExceptionMVVM;
-    void deleteRecord(int recordId) throws ExceptionMVVM;
-    void insertUser(User user);
+    boolean addRecord(Record record) throws ExceptionMVVM;
+    boolean deleteRecord(int recordId) throws ExceptionMVVM;
+    boolean insertUser(User user);
     boolean updateUserCredentials(User user);
     User checkCredentials(User user);
     void initialize (Statement statement);

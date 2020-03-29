@@ -1,52 +1,72 @@
 package com.securevault.websecurevault.tests;
 
+import com.securevault.websecurevault.model.ExceptionMVVM;
+import com.securevault.websecurevault.utilities.Record;
 import com.securevault.websecurevault.utilities.User;
 import com.securevault.websecurevault.model.ModelDerbyDB;
 import org.junit.*;
 import static org.junit.Assert.*;
 
 public class TestModelDerbyDB {
+    ModelDerbyDB modelDerbyDB = new ModelDerbyDB();
 
     @Test
-    public void test_getRecords()
+    public void testSuccesses_getRecords()
     {
-        System.out.println("test the getRecords() method");
-
+        System.out.println("Successes test of the getRecords() method");
+        User user = new User("master","Yuval","Nir","1234");
+        assertFalse(modelDerbyDB.getRecords("Credit Cards", user).isEmpty());
     }
 
     @Test
-    public void test_addRecord()
+    public void testFail_getRecords()
     {
-        System.out.println("test the addRecord() method");
-
+        System.out.println("Fail test of the getRecords() method");
+        User user = new User("none","what?","where?","1234");
+        assertTrue(modelDerbyDB.getRecords("Credit Cards", user).isEmpty());
     }
 
     @Test
+    public void testSuccesses_addRecord() throws ExceptionMVVM {
+        System.out.println("Successes test of the addRecord() method");
+        Record record = new Record("Test Note","Notes", "", "", 0, 0, "", "Some note...", 0, 0, "", "", "", 0, "master");
+        assertTrue(modelDerbyDB.addRecord(record));
+    }
+
+    /*@Test
     public void test_deleteRecord()
     {
-        System.out.println("test the deleteRecord() method");
-
+        //System.out.println("test the deleteRecord() method");
     }
 
     @Test
     public void test_insertUser()
     {
         System.out.println("test the insertUser() method");
+        User user = new User("TestUser","Test","User","1234");
+        assertTrue(modelDerbyDB.insertUser(user));
+    }*/
 
+    @Test
+    public void testSuccesses_updateUserCredentials()
+    {
+        System.out.println("Successes test of the updateUserCredentials() method");
+        User user = new User("master","Yuval","Nir","1234");
+        assertTrue(modelDerbyDB.updateUserCredentials(user));
     }
 
     @Test
-    public void test_updateUserCredentials()
+    public void testFail_updateUserCredentials()
     {
-        System.out.println("test the updateUserCredentials() method");
-
+        System.out.println("Fail test of the updateUserCredentials() method");
+        User user = new User("none","what?","where?","1234");
+        assertFalse(modelDerbyDB.updateUserCredentials(user));
     }
 
     @Test
     public void testSuccesses_checkCredentials()
     {
         System.out.println("Successes test of the checkCredentials() method");
-        ModelDerbyDB modelDerbyDB = new ModelDerbyDB();
         User user = new User();
         user.setUser_id("master");
         user.setMaster_pass("1234");
@@ -57,17 +77,16 @@ public class TestModelDerbyDB {
     public void testFail_checkCredentials()
     {
         System.out.println("Fail test of the checkCredentials() method");
-        ModelDerbyDB modelDerbyDB = new ModelDerbyDB();
         User user = new User();
         user.setUser_id("notMaster");
         user.setMaster_pass("1234");
         assertNull(modelDerbyDB.checkCredentials(user).getUser_id());
     }
 
-    @Test
+   /* @Test
     public void test_initialize()
     {
         System.out.println("test the initialize() method");
 
-    }
+    }*/
 }
