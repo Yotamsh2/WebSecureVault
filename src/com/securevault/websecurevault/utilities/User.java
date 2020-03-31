@@ -16,6 +16,7 @@ public class User {
     public User(){
     }
 
+    /**User toString method is responsible to return the user as a string to be printed.*/
     @Override
     public String toString() {
         return "User{" +
