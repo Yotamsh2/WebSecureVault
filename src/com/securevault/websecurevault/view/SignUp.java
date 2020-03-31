@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**SignUp page is the page that responsible for showing the sign up page.*/
 public class SignUp {
     private JPanel signupPagePanel;
     private JFrame signupPageFrame = new JFrame();
@@ -17,13 +18,6 @@ public class SignUp {
     private JTextField repeatpassTextField;
     private JTextField firstnameTextField;
     private JTextField lastnameTextField;
-    private JLabel securevaultLabel;
-    private JLabel emailLabel;
-    private JLabel passwordLabel;
-    private JLabel repeatpasslabel;
-    private JLabel firstnameLabel;
-    private JLabel lastnameLabel;
-    private JLabel signuppageLabel;
     private JButton cancelButton;
 
 
@@ -54,6 +48,7 @@ public class SignUp {
         });
     }
 
+    /**SignUp page go method is responsible for displaying the sign up page.*/
     public void go(){
         signupPageFrame.setSize(340,300);
         signupPageFrame.setContentPane(signupPagePanel);

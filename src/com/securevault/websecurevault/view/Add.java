@@ -9,6 +9,7 @@ import com.securevault.websecurevault.viewmodel.ViewModel;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**Add page is the page that responsible for entering a new record to the system.*/
 public class Add {
     private JPanel addpagePanel;
     private JFrame addpageFrame = new JFrame();
@@ -297,6 +298,7 @@ public class Add {
         });
     }
 
+    /**Add page go method is responsible for displaying the add page.*/
     public void go(MainScreen mainScreen, User user)
     {
         this.mainToEnable = mainScreen;

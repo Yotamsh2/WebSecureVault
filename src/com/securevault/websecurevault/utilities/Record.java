@@ -2,7 +2,7 @@ package com.securevault.websecurevault.utilities;
 
 import java.util.Vector;
 
-
+/**Record class is the class that holds our main object in the system, the user records.*/
 public class Record {
 
     private String title;
@@ -21,6 +21,7 @@ public class Record {
     private Integer record_id;
     private String user_id;
 
+    /**asVector method is used to insert the record values into a vector, based on the category it belongs to.*/
     public Vector<String> asVector(String strCategory) {
         Vector<String> v = new Vector<>();
         switch(strCategory) {
@@ -222,6 +223,7 @@ public class Record {
         this.user_id = user_id;
     }
 
+    /**Record toString method is responsible to return the record as a string to be printed.*/
     @Override
     public String toString() {
         return "Record{" +

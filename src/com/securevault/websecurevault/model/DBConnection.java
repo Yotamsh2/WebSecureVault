@@ -8,14 +8,14 @@ import java.util.logging.Logger;
  * Also in case the derby database not created yet - it creates the DB and a table.*/
 public class DBConnection {
 
-    /**Determine the requested driver and the jdbc protocol*/
+    /**Determine the requested driver and the jdbc protocol.*/
     public static String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     public static String protocol = "jdbc:derby:secureVaultDB;create=true";
 
-    /**Constructor initialize the references of: connection, statement and resultSet(which hold the lines we ask to get from the DB).*/
     public DBConnection() {
     }
 
+    /**Responsible for the connection to the DB.*/
     public Statement getConnection() {
         Connection connection;
         Statement statement = null;
@@ -37,6 +37,7 @@ public class DBConnection {
         return statement;
     }
 
+    /**Responsible for closing the Connection to the DB.*/
     public void closeConnection (Connection connection, Statement statement, ResultSet rs){
 
         if (rs != null) try {

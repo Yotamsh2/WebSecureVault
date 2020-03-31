@@ -8,8 +8,7 @@ import java.sql.Statement;
 import java.util.Vector;
 
 /**ModelInterface is an interface which is implemented by model classes.
- * It has three methods that can be implemented for multiple databases*/
-
+ * It has seven methods that can be implemented for multiple databases.*/
 public interface ModelInterface {
     Vector<Record> getRecords(String category, User user) throws ExceptionMVVM, SQLException;
     boolean addRecord(Record record) throws ExceptionMVVM;

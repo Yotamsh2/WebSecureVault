@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**Profile page is the page that responsible for showing and editing the user information.*/
 public class Profile {
     private JFrame profilepageFrame;
     private JPanel profilepagePanel;
@@ -20,13 +21,6 @@ public class Profile {
     private JTextField newpasswordTextField;
     private JTextField repeatpasswordTextField;
     private JTextField lastnameTextField;
-    private JLabel securevaultLabel;
-    private JLabel firstnameLabel;
-    private JLabel emailLabel;
-    private JLabel currentpasswordLabel;
-    private JLabel newpasswordLabel;
-    private JLabel repeatpasswordLabel;
-    private JLabel lastnameLabel;
 
     MainScreen mainToEnable = new MainScreen();
     User activeUser = new User();
@@ -74,6 +68,7 @@ public class Profile {
         });
     }
 
+    /**Profile page go method is responsible for displaying the profile page.*/
     public void go(MainScreen mainScreen, User user)
     {
         activeUser = user;

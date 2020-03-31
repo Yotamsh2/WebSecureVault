@@ -1,5 +1,6 @@
 package com.securevault.websecurevault.utilities;
 
+/**ColumnNames class is used to name the columns lines easily and evenly across the whole system.*/
 public class ColumnNames {
     //Names of the record columns
     public static final String title = "title";

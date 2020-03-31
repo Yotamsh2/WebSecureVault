@@ -14,9 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-//TODO: make variables camelCase and not snake_case
-//TODO: meaningful variable names
-//TODO: make panels final with initalization
+/**MainScreen page is the page that responsible for showing the user all his records based on the category he chooses.
+ * This is the page the user will be seeing after he logs in or sings up.
+ * from this page the user can navigate to the profile and add page, and can use the delete button to delete records.*/
 public class MainScreen extends JFrame{
     private JFrame mainFrame = new JFrame();
     private JLabel usernameLabel = new JLabel();
@@ -56,7 +56,6 @@ public class MainScreen extends JFrame{
     };
 
     public MainScreen() {
-
         // Initializing components
         mainPanel = new JPanel();
         categoryButtonPanel = new JPanel();
@@ -79,7 +78,6 @@ public class MainScreen extends JFrame{
         topBarPanel.setLayout(new GridLayout(1,2));
         topBarPanel.setBackground(back);
         formViewTable.getTableHeader().setReorderingAllowed(false);
-
         tableLabel.setHorizontalAlignment(0);
         tableLabel.setForeground(Color.WHITE);
         Dimension d = new Dimension(90,25);
@@ -113,7 +111,7 @@ public class MainScreen extends JFrame{
         mainPanel.add(tablePanel,BorderLayout.CENTER);
         mainPanel.add(topBarPanel,BorderLayout.NORTH);
 
-        //Listeners
+        //Action Listener
         profileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -268,7 +266,7 @@ public class MainScreen extends JFrame{
         });
     }
 
-    /**making mainPanel enabled again after being disabled.*/
+    /**making mainPanel enabled again after being disabled and bringing him to the front of the screen.*/
     public void setFrameEnabled() {
         mainFrame.setEnabled(true);
         mainFrame.setVisible(true);
@@ -298,7 +296,6 @@ public class MainScreen extends JFrame{
         records.forEach(record -> rows.add(record.asVector(Category.creditCards)));
         tableModel.setDataVector(rows, columnNames);
         formViewTable.setModel(tableModel);
-        //formViewTable.setBackground(back);
 
         usernameLabel.setText(activeUser.getFirst_name()+" "+activeUser.getLast_name());
         usernameLabel.setForeground(Color.WHITE);

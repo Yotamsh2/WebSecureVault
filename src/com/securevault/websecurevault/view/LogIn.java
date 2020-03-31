@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**Login page is the page that responsible for the user login screen.*/
 public class LogIn {
     private JPanel loginPagePanel;
     private JFrame loginPageFrame;
@@ -14,9 +15,6 @@ public class LogIn {
     private JButton singUpButton;
     private JTextField emailTextField;
     private JTextField passwordTextField;
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
-    private JLabel secureVaultLogo;
 
     public LogIn() {
         logInButton.addActionListener(new ActionListener() {
@@ -49,6 +47,7 @@ public class LogIn {
         });
     }
 
+    /**Login page go method is responsible for displaying the login page.*/
     public void go(){
         loginPageFrame = new JFrame();
         loginPageFrame.setSize(420,250);

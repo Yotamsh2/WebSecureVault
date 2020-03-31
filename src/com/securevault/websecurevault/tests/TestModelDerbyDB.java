@@ -33,20 +33,6 @@ public class TestModelDerbyDB {
         assertTrue(modelDerbyDB.addRecord(record));
     }
 
-    /*@Test
-    public void test_deleteRecord()
-    {
-        //System.out.println("test the deleteRecord() method");
-    }
-
-    @Test
-    public void test_insertUser()
-    {
-        System.out.println("test the insertUser() method");
-        User user = new User("TestUser","Test","User","1234");
-        assertTrue(modelDerbyDB.insertUser(user));
-    }*/
-
     @Test
     public void testSuccesses_updateUserCredentials()
     {
@@ -82,11 +68,4 @@ public class TestModelDerbyDB {
         user.setMaster_pass("1234");
         assertNull(modelDerbyDB.checkCredentials(user).getUser_id());
     }
-
-   /* @Test
-    public void test_initialize()
-    {
-        System.out.println("test the initialize() method");
-
-    }*/
 }
