@@ -1,5 +1,6 @@
 package com.securevault.websecurevault.utilities;
 
+/**User class is the class that holds our User object in the system, the user that has logged in to the system.*/
 public class User {
     private String user_id;
     private String first_name;
