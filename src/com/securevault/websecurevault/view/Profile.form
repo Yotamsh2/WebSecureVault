@@ -21,7 +21,7 @@
           <text value="Change password:"/>
         </properties>
       </component>
-      <component id="56398" class="javax.swing.JLabel" binding="newpasswordLabel">
+      <component id="56398" class="javax.swing.JLabel">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -30,7 +30,7 @@
           <text value="New password"/>
         </properties>
       </component>
-      <component id="2d7d1" class="javax.swing.JLabel" binding="repeatpasswordLabel">
+      <component id="2d7d1" class="javax.swing.JLabel">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -91,7 +91,7 @@
           <text value="PROFILE"/>
         </properties>
       </component>
-      <component id="8a90a" class="javax.swing.JLabel" binding="securevaultLabel">
+      <component id="8a90a" class="javax.swing.JLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -101,7 +101,7 @@
           <text value="SECURE VAULT"/>
         </properties>
       </component>
-      <component id="75c25" class="javax.swing.JLabel" binding="currentpasswordLabel">
+      <component id="75c25" class="javax.swing.JLabel">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -123,7 +123,7 @@
           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="dbeb3" class="javax.swing.JLabel" binding="firstnameLabel">
+      <component id="dbeb3" class="javax.swing.JLabel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -132,7 +132,7 @@
           <text value="First Name"/>
         </properties>
       </component>
-      <component id="dfd62" class="javax.swing.JLabel" binding="emailLabel">
+      <component id="dfd62" class="javax.swing.JLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -161,7 +161,7 @@
           <enabled value="false"/>
         </properties>
       </component>
-      <component id="9ef95" class="javax.swing.JLabel" binding="lastnameLabel">
+      <component id="9ef95" class="javax.swing.JLabel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
